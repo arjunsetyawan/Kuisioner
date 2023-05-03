@@ -69,7 +69,7 @@
                                     @enderror
                                 </div>
 
-                                <input type="hidden" class="form-control" id="role_id" value="1" name="role_id">
+                                <input type="hidden" class="form-control" id="role_id" value="2" name="role_id">
 
                                 <input type="submit" class="btn btn-block btn-primary">
 
