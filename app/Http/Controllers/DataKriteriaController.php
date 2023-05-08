@@ -63,9 +63,11 @@ class DataKriteriaController extends Controller
      * @param  \App\Models\DataKriteria  $dataKriteria
      * @return \Illuminate\Http\Response
      */
-    public function edit(DataKriteria $dataKriteria)
+    public function edit($id)
     {
-        //
+        $data = DataKriteria::find($id);
+        // dd($id);
+        return view('admin.datakriteria.updatekriteria', ['data' => $data]);
     }
 
     /**
@@ -75,9 +77,15 @@ class DataKriteriaController extends Controller
      * @param  \App\Models\DataKriteria  $dataKriteria
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, DataKriteria $dataKriteria)
+    public function update(Request $request, DataKriteria $id)
     {
-        //
+        $validateData = $request->validate([
+            'kriteria' => 'required',
+            'detail_kriteria' => 'required'
+        ]);
+        // dd($id);
+        $id->update($validateData);
+        return redirect()->route('viewkriteria')->with('success', 'Sukses update!');
     }
 
     /**

@@ -26,9 +26,12 @@ class DashboardController extends Controller
             } elseif (Auth::user()->role_id == 3) {
                 return view('hrd.index');
             }
+
             return view('index');
         }
-        return view('index');
+        $data = DB::table('kriteria')
+            ->get();
+        return view('index', ['data' => $data]);
     }
 
     /**

@@ -48,7 +48,9 @@
                     @auth
                         <li><a class="nav-link scrollto active" href="#hero">Home</a></li>
                         <li><a class="nav-link scrollto" href="#about">About</a></li>
+                        {{-- @can('admin') --}}
                         <li><a class="nav-link scrollto" href="#kriteria">Kriteria</a></li>
+                        {{-- @endcan --}}
                         <li><a class="nav-link scrollto" href="#kuisioner">Kuisioner</a></li>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
@@ -83,6 +85,7 @@
         </div>
     </header><!-- End Header -->
 
+    <div></div>
     <div>
         @yield('container')
     </div>

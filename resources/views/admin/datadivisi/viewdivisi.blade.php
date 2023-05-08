@@ -8,6 +8,13 @@
                 <h6 class="m-0 font-weight-bold text-primary">Data Divisi</h6>
             </div>
 
+            @if (session()->has('success'))
+                <div class="alert alert-success" role="alert">
+                    {{ session('success') }}
+
+                </div>
+            @endif
+
             @if (session()->has('sukses'))
                 <div class="alert alert-success" role="alert">
                     {{ session('sukses') }}
@@ -33,8 +40,9 @@
                                     <th>{{ $no++ }}</th>
                                     <td>{{ $data->nama_divisi }}</td>
                                     <td>
-                                        <button class="btn btn-primary" type="button"><i
-                                                class="bi bi-pencil-square"></i></button>
+                                        <a href="/datadivisi/edit/{{ $data->id }}" class="btn btn-primary"><i
+                                                class="bi bi-pencil-square"></i></a>
+
                                         <form action="/datadivisi/delete/{{ $data->id }}" method="POST"
                                             class="d-inline">
                                             {{-- @method('delete') --}}

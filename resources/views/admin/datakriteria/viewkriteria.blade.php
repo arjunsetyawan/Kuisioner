@@ -41,8 +41,8 @@
                                     <td>{{ $data->kriteria }}</td>
                                     <td>{{ $data->detail_kriteria }}</td>
                                     <td>
-                                        <button class="btn btn-primary" type="button"><i
-                                                class="bi bi-pencil-square"></i></button>
+                                        <a href="/datakriteria/edit/{{ $data->id }}" class="btn btn-primary"><i
+                                                class="bi bi-pencil-square"></i></a>
                                         <form action="/datakriteria/delete/{{ $data->id }}" method="POST"
                                             class="d-inline">
                                             {{-- @method('delete') --}}

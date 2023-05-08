@@ -71,9 +71,10 @@ class DataUserController extends Controller
      * @param  \App\Models\DataUser  $dataUser
      * @return \Illuminate\Http\Response
      */
-    public function edit()
+    public function edit($id)
     {
-        //
+        $data = DataUser::find($id);
+        return view('admin.datauser.updateuser', ['data' => $data, 'roles' => Role::all()]);
     }
 
     /**
@@ -83,9 +84,17 @@ class DataUserController extends Controller
      * @param  \App\Models\DataUser  $dataUser
      * @return \Illuminate\Http\Response
      */
-    public function update()
+    public function update(Request $request, DataUser $id)
     {
-        //
+        $validateData = $request->validate([
+            'username' => 'required|min:5',
+            'email' => 'required|email:dns',
+            'password' => 'required|min:8|max:255',
+            'role_id' => 'required'
+        ]);
+        $validateData['password'] = Hash::make($validateData['password']);
+        $id->update($validateData);
+        return redirect()->route('viewuser')->with('success', 'Sukses update!');
     }
 
     /**

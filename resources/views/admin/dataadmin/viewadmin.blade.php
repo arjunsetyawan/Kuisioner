@@ -52,8 +52,8 @@
                                         @endif
                                     </td>
                                     <td>
-                                        <button class="btn btn-primary" type="button"><i
-                                                class="bi bi-pencil-square"></i></button>
+                                        <a href="/dataadmin/edit/{{ $data->id }}" class="btn btn-primary"><i
+                                                class="bi bi-pencil-square"></i></a>
                                         <form action="/dataadmin/delete/{{ $data->id }}" method="POST"
                                             class="d-inline">
                                             {{-- @method('delete') --}}

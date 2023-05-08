@@ -1,18 +1,18 @@
 @extends('layouts.admin')
 @section('container')
     <div class="container-fluid">
-        <h1 class="h3 mb-2 text-gray-800">Tambah Data Admin</h1>
+        <h1 class="h3 mb-2 text-gray-800">Update Data User</h1>
         <p class="mb-4"></p>
         <div class="card shadow mb-4">
             <div class="card-body">
                 <div class="table-responsive">
-                    <form class="col-lg-8" method="post" action="/dataadmin/tambah">
+                    <form class="col-lg-8" method="post" action="/datauser/update/{{ $data->id }}">
                         @csrf
                         <div class="mb-3">
                             <label for="username"
                                 class="form-label @error('username') is-invalid @enderror">Username</label>
                             <input type="text" class="form-control" id="username" name="username" required
-                                value="{{ old('username') }}" autofocus>
+                                value="{{ old('username', $data->username) }}" autofocus>
                             @error('username')
                                 <div class="invalid-feedback">
                                     {{ $message }}
@@ -22,7 +22,7 @@
                         <div class="mb-3">
                             <label for="email" class="form-label">Email</label>
                             <input type="text" class="form-control @error('email') is-invalid @enderror" id="email"
-                                name="email" required value="{{ old('email') }}">
+                                name="email" required value="{{ old('email', $data->email) }}">
                             @error('email')
                                 <div class="invalid-feedback">
                                     {{ $message }}
@@ -31,8 +31,8 @@
                         </div>
                         <div class="mb-3">
                             <label for="password" class="form-label">Password</label>
-                            <input type="password" class="form-control @error('password') is-invalid @enderror"
-                                id="password" name="password" required>
+                            <input type="text" class="form-control @error('password') is-invalid @enderror"
+                                id="password" name="password" value="{{ old('password', $data->password) }}" required>
                             @error('password')
                                 <div class="invalid-feedback">
                                     {{ $message }}

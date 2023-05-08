@@ -63,9 +63,11 @@ class DataDivisiController extends Controller
      * @param  \App\Models\DataDivisi  $dataDivisi
      * @return \Illuminate\Http\Response
      */
-    public function edit(DataDivisi $dataDivisi)
+    public function edit($id)
     {
-        //
+        $data = DataDivisi::find($id);
+
+        return view('admin.datadivisi.updatedivisi', ['data' => $data]);
     }
 
     /**
@@ -75,9 +77,15 @@ class DataDivisiController extends Controller
      * @param  \App\Models\DataDivisi  $dataDivisi
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, DataDivisi $dataDivisi)
+    public function update(Request $request, DataDivisi $id)
     {
-        //
+        $validateData = $request->validate([
+            'nama_divisi' => 'required'
+        ]);
+        // dd($id);
+        $id->update($validateData);
+        // DataDivisi::create($validateData);
+        return redirect()->route('viewdivisi')->with('success', 'Sukses update!');
     }
 
     /**

@@ -69,9 +69,10 @@ class DataAdminController extends Controller
      * @param  \App\Models\DataAdmin  $dataAdmin
      * @return \Illuminate\Http\Response
      */
-    public function edit(DataAdmin $dataAdmin)
+    public function edit($id)
     {
-        //
+        $data = DataAdmin::find($id);
+        return view('admin.dataadmin.updateadmin', ['data' => $data, 'roles' => Role::all()]);
     }
 
     /**
@@ -81,9 +82,17 @@ class DataAdminController extends Controller
      * @param  \App\Models\DataAdmin  $dataAdmin
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, DataAdmin $dataAdmin)
+    public function update(Request $request, DataAdmin $id)
     {
-        //
+        $validateData = $request->validate([
+            'username' => 'required|min:5',
+            'email' => 'required|email:dns',
+            'password' => 'required|min:8|max:255',
+            'role_id' => 'required'
+        ]);
+        $validateData['password'] = Hash::make($validateData['password']);
+        $id->update($validateData);
+        return redirect()->route('viewadmin')->with('success', 'Sukses update!');
     }
 
     /**
