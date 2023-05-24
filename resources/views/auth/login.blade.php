@@ -49,9 +49,8 @@
                     <div class="row justify-content-center">
                         <div class="col-md-8">
                             <div class="mb-4">
-                                <h3>Sign In</h3>
-                                <p class="mb-4">Lorem ipsum dolor sit amet elit. Sapiente sit aut eos consectetur
-                                    adipisicing.</p>
+                                <h3 class="mb-4">Sign In</h3>
+
                             </div>
                             <form action="/login" method="post">
                                 @csrf

@@ -56,10 +56,19 @@
                 </a>
                 <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="/datauser">Data User</a>
-                        <a class="collapse-item" href="/dataadmin">Data Admin</a>
-                        <a class="collapse-item" href="/viewdivisi">Data divisi</a>
-                        <a class="collapse-item" href="">Data karyawan</a>
+                        @can('admin')
+                            <a class="collapse-item" href="/datauser">Data User</a>
+                            <a class="collapse-item" href="/dataadmin">Data Admin</a>
+                            <a class="collapse-item" href="/viewdivisi">Data divisi</a>
+                            <a class="collapse-item" href="">Data karyawan</a>
+                        @endcan
+
+                        @can('hrd')
+                            <a class="collapse-item" href="/hrd/datauser">Data User</a>
+                            <a class="collapse-item" href="/hrd/dataadmin">Data Admin</a>
+                            <a class="collapse-item" href="/hrd/viewdivisi">Data divisi</a>
+                            <a class="collapse-item" href="">Data karyawan</a>
+                        @endcan
                     </div>
                 </div>
             </li>
@@ -74,9 +83,17 @@
                 <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities"
                     data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="/viewkriteria">Data kriteria</a>
-                        <a class="collapse-item" href="utilities-border.html">Data Pertanyaan</a>
-                        <a class="collapse-item" href="utilities-animation.html">Data Hasil</a>
+                        @can('admin')
+                            <a class="collapse-item" href="/viewkriteria">Data kriteria</a>
+                            <a class="collapse-item" href="">Data Pertanyaan</a>
+                            <a class="collapse-item" href="">Data Hasil</a>
+                        @endcan
+
+                        @can('hrd')
+                            <a class="collapse-item" href="/hrd/viewkriteria">Data kriteria</a>
+                            <a class="collapse-item" href="">Data Pertanyaan</a>
+                            <a class="collapse-item" href="">Data Hasil</a>
+                        @endcan
                     </div>
                 </div>
             </li>

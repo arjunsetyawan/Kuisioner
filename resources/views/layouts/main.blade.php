@@ -42,7 +42,7 @@
             <h1 class="logo me-auto"><a href="">E-Kinerja</a></h1>
             <!-- Uncomment below if you prefer to use an image logo -->
             <!-- <a href="index.html" class="logo me-auto"><img src="{!! asset('img/logo.png') !!}" alt="" class="img-fluid"></a>-->
-
+            
             <nav id="navbar" class="navbar">
                 <ul>
                     @auth
@@ -58,7 +58,8 @@
                                 Welcome back, {{ auth()->user()->username }}
                             </a>
                             <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="#">Profile<i class="bi bi-person-fill"></i></a>
+                                <li><a class="dropdown-item" style="font-size: 15px;" href="/profile">Profile<i
+                                            class="bi bi-person-fill"></i></a>
                                 </li>
                                 <li>
                                     <hr class="dropdown-divider">

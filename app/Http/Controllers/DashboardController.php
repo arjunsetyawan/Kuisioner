@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Dashboard;
-use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
@@ -24,14 +23,16 @@ class DashboardController extends Controller
                 $kriteria = DB::table('kriteria')->count();
                 return view('admin.index', ['users' => $users, 'divisi' => $divisi, 'kriteria' => $kriteria]);
             } elseif (Auth::user()->role_id == 3) {
-                return view('hrd.index');
+                $users = DB::table('users')->count();
+                $divisi = DB::table('divisi')->count();
+                $kriteria = DB::table('kriteria')->count();
+                return view('admin.index', ['users' => $users, 'divisi' => $divisi, 'kriteria' => $kriteria]);
             }
-
-            return view('index');
+            return view('user.index');
         }
         $data = DB::table('kriteria')
             ->get();
-        return view('index', ['data' => $data]);
+        return view('user.index', ['data' => $data]);
     }
 
     /**

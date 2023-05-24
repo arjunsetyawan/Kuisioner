@@ -15,7 +15,7 @@ class RegisterController extends Controller
      */
     public function index()
     {
-        return view('register');
+        return view('auth.register');
     }
 
     /**
@@ -45,7 +45,7 @@ class RegisterController extends Controller
         $validateData['password'] = Hash::make($validateData['password']);
         User::create($validateData);
         $request->session()->flash('success', 'Registration succesfull! Please login!');
-        return redirect('/login');
+        return redirect('/user/login');
     }
 
     /**

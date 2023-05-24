@@ -8,6 +8,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DataAdminController;
 use App\Http\Controllers\DataDivisiController;
 use App\Http\Controllers\DataKriteriaController;
+use App\Http\Controllers\ProfilController;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,7 +21,7 @@ use App\Http\Controllers\DataKriteriaController;
 |
 */
 
-//Dashboard User
+//Dashboard
 Route::get('/', [DashboardController::class, 'index']);
 
 //Login
@@ -31,6 +32,12 @@ Route::post('/logout', [LoginController::class, 'logout']);
 //Register
 Route::get('/register', [RegisterController::class, 'index'])->middleware('guest');
 Route::post('/register', [RegisterController::class, 'store']);
+
+Route::middleware(['auth', 'IsUser'])->group(function () {
+
+    Route::get('/profile', [ProfilController::class, 'index'])->name('viewprofil');
+    Route::post('/profile/tambah', [ProfilController::class, 'store']);
+});
 
 Route::middleware(['auth', 'IsAdmin'])->group(function () {
 
@@ -65,4 +72,19 @@ Route::middleware(['auth', 'IsAdmin'])->group(function () {
     Route::get('/datakriteria/edit/{id}', [DataKriteriaController::class, 'edit'])->name('editkriteria');
     Route::post('/datakriteria/update/{id}', [DataKriteriaController::class, 'update'])->name('updatekriteria');
     Route::post('/datakriteria/delete/{id}', [DataKriteriaController::class, 'destroy'])->name('deletekriteria');
+});
+
+Route::middleware(['auth', 'IsHRD'])->group(function () {
+
+    //Admin -> Data User
+    Route::get('/hrd/datauser', [DataUserController::class, 'index']);
+
+    //Admin -> Data Admin
+    Route::get('/hrd/dataadmin', [DataAdminController::class, 'index']);
+
+    //Admin -> Data Divisi
+    Route::get('/hrd/viewdivisi', [DataDivisiController::class, 'index']);
+
+    //Admin -> Data Kriteria
+    Route::get('/hrd/viewkriteria', [DataKriteriaController::class, 'index']);
 });

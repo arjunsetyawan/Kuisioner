@@ -23,14 +23,18 @@
             @endif
 
             <div class="card-body">
-                <a href="/datadivisi/create" class="mb-4 btn btn-primary">Tambah data divisi</a>
+                @can('admin')
+                    <a href="/datadivisi/create" class="mb-4 btn btn-primary">Tambah data divisi</a>
+                @endcan
                 <div class="table-responsive">
                     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                         <thead>
                             <tr>
                                 <th style="width: 5%">No</th>
                                 <th>Divisi</th>
-                                <th style="width :20%">Action</th>
+                                @can('admin')
+                                    <th style="width :10%">Action</th>
+                                @endcan
                             </tr>
                         </thead>
                         <tfoot>
@@ -39,19 +43,21 @@
                                 <tr>
                                     <th>{{ $no++ }}</th>
                                     <td>{{ $data->nama_divisi }}</td>
-                                    <td>
-                                        <a href="/datadivisi/edit/{{ $data->id }}" class="btn btn-primary"><i
-                                                class="bi bi-pencil-square"></i></a>
+                                    @can('admin')
+                                        <td>
+                                            <a href="/datadivisi/edit/{{ $data->id }}" class="btn btn-primary"><i
+                                                    class="bi bi-pencil-square"></i></a>
 
-                                        <form action="/datadivisi/delete/{{ $data->id }}" method="POST"
-                                            class="d-inline">
-                                            {{-- @method('delete') --}}
-                                            @csrf
-                                            <button class="btn btn-danger" type="submit"
-                                                onclick="return confirm('Are you sure want to delete?')"><i
-                                                    class="bi bi-trash"></i></button>
-                                        </form>
-                                    </td>
+                                            <form action="/datadivisi/delete/{{ $data->id }}" method="POST"
+                                                class="d-inline">
+                                                {{-- @method('delete') --}}
+                                                @csrf
+                                                <button class="btn btn-danger" type="submit"
+                                                    onclick="return confirm('Are you sure want to delete?')"><i
+                                                        class="bi bi-trash"></i></button>
+                                            </form>
+                                        </td>
+                                    @endcan
                                 </tr>
                             @endforeach
                             </tbody>

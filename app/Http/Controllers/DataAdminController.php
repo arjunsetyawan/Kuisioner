@@ -30,7 +30,7 @@ class DataAdminController extends Controller
      */
     public function create()
     {
-        return view('admin.dataadmin.tambahadmin');
+        return view('admin.dataadmin.tambahadmin', ['roles' => Role::all()]);
     }
 
     /**
