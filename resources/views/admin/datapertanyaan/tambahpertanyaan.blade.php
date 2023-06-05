@@ -1,17 +1,17 @@
 @extends('layouts.admin')
 @section('container')
     <div class="container-fluid">
-        <h1 class="h3 mb-2 text-gray-800">Tambah Data User</h1>
+        <h1 class="h3 mb-2 text-gray-800">Tambah Data Pertanyaan</h1>
         <p class="mb-4"></p>
         <div class="card shadow mb-4">
             <div class="card-body">
                 <div class="table-responsive">
-                    <form class="col-lg-8" method="post" action="/datauser/tambah">
+                    <form class="col-lg-8" method="post" action="/datapertanyaan/tambah">
                         @csrf
                         <div class="mb-3">
                             <label for="username"
-                                class="form-label @error('username') is-invalid @enderror">Username</label>
-                            <input type="text" class="form-control" id="username" name="username" required
+                                class="form-label ">Username</label>
+                            <input type="text" class="form-control @error('username') is-invalid @enderror" id="username" name="username" required
                                 value="{{ old('username') }}" autofocus>
                             @error('username')
                                 <div class="invalid-feedback">
@@ -47,6 +47,7 @@
                                 @endforeach
                             </select>
                         </div>
+
                         <div class="mb-3">
                             <label for="status" class="form-label">Status</label>
                             <select class="form-select" name="status">

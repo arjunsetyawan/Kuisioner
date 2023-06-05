@@ -45,7 +45,8 @@ class DataAdminController extends Controller
             'username' => 'required|min:5',
             'email' => 'required|email:dns',
             'password' => 'required|min:8|max:255',
-            'role_id' => 'required'
+            'role_id' => 'required',
+            'status' => 'required'
         ]);
         $validateData['password'] = Hash::make($validateData['password']);
         DataAdmin::create($validateData);
@@ -88,7 +89,8 @@ class DataAdminController extends Controller
             'username' => 'required|min:5',
             'email' => 'required|email:dns',
             'password' => 'required|min:8|max:255',
-            'role_id' => 'required'
+            'role_id' => 'required',
+            'status' => 'required'
         ]);
         $validateData['password'] = Hash::make($validateData['password']);
         $id->update($validateData);

@@ -15,6 +15,7 @@ class DataUser extends Model
         'username',
         'email',
         'password',
-        'role_id'
+        'role_id',
+        'status'
     ];
 }

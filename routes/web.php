@@ -2,13 +2,14 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\ProfilController;
 use App\Http\Controllers\DataUserController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DataAdminController;
 use App\Http\Controllers\DataDivisiController;
+use App\Http\Controllers\PertanyaanController;
 use App\Http\Controllers\DataKriteriaController;
-use App\Http\Controllers\ProfilController;
 
 /*
 |--------------------------------------------------------------------------
@@ -37,6 +38,12 @@ Route::middleware(['auth', 'IsUser'])->group(function () {
 
     Route::get('/profile', [ProfilController::class, 'index'])->name('viewprofil');
     Route::post('/profile/tambah', [ProfilController::class, 'store']);
+    Route::middleware(['CekProfile'])->group(function () {
+        Route::get('/kuisioner' , function(){
+            dd("coba");
+            // return view('user.kuisioner');
+        })->name('kuisioner');
+    });
 });
 
 Route::middleware(['auth', 'IsAdmin'])->group(function () {
@@ -72,6 +79,14 @@ Route::middleware(['auth', 'IsAdmin'])->group(function () {
     Route::get('/datakriteria/edit/{id}', [DataKriteriaController::class, 'edit'])->name('editkriteria');
     Route::post('/datakriteria/update/{id}', [DataKriteriaController::class, 'update'])->name('updatekriteria');
     Route::post('/datakriteria/delete/{id}', [DataKriteriaController::class, 'destroy'])->name('deletekriteria');
+
+    //Admin -> Data Pertanyaan
+    Route::get('/viewpertanyaan', [PertanyaanController::class, 'index'])->name('viewpertanyaan');
+    Route::get('/datapertanyaan/create', [PertanyaanController::class, 'create'])->name('createpertanyaan');
+    Route::post('/datapertanyaan/tambah', [PertanyaanController::class, 'store']);
+    Route::get('/datapertanyaan/edit/{id}', [PertanyaanController::class, 'edit'])->name('editpertanyaan');
+    Route::post('/datapertanyaan/update/{id}', [PertanyaanController::class, 'update'])->name('updatepertanyaan');
+    Route::post('/datapertanyaan/delete/{id}', [PertanyaanController::class, 'destroy'])->name('deletepertanyaan');
 });
 
 Route::middleware(['auth', 'IsHRD'])->group(function () {

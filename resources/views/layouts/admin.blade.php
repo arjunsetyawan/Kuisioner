@@ -85,7 +85,7 @@
                     <div class="bg-white py-2 collapse-inner rounded">
                         @can('admin')
                             <a class="collapse-item" href="/viewkriteria">Data kriteria</a>
-                            <a class="collapse-item" href="">Data Pertanyaan</a>
+                            <a class="collapse-item" href="/viewpertanyaan">Data Pertanyaan</a>
                             <a class="collapse-item" href="">Data Hasil</a>
                         @endcan
 
@@ -161,11 +161,6 @@
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
                                 aria-labelledby="userDropdown">
-                                <a class="dropdown-item" href="#">
-                                    <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    Profile
-                                </a>
-                                <div class="dropdown-divider"></div>
                                 {{-- <form action="/logout" method="post">
                                     <button type="submit">Logout</button>
                                     @csrf

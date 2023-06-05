@@ -91,94 +91,16 @@
             </div>
 
             <div class="row">
+                @foreach ($data as $index )
                 <div class="col-xl-3 col-md-6 d-flex align-items-stretch mb-4" data-aos="zoom-in"
                     data-aos-delay="100">
                     <div class="icon-box">
                         <div class="icon"><i class="bx bxl-dribbble"></i></div>
-                        <h4><a href="">Attitude</a></h4>
-                        <p>Kriteria ini menilai bagaimana sikap karyawan terhadap rekan kerja, apakah dia bisa untuk
-                            diajak bekerja sama. Karyawan yang memiliki attitude yang baik akan membentuk lingkungan
-                            kerja yang positif</p>
+                        <h4><a href="">{{ $index->kriteria }}</a></h4>
+                        <p>{{ $index-> detail_kriteria }}</p>
                     </div>
                 </div>
-
-                <div class="col-xl-3 col-md-6 d-flex align-items-stretch mt-4 mt-md-0 mb-4" data-aos="zoom-in"
-                    data-aos-delay="200">
-                    <div class="icon-box">
-                        <div class="icon"><i class="bx bx-file"></i></div>
-                        <h4><a href="">Kedisiplinan kerja</a></h4>
-                        <p>Kriteria ini menilai apakah karyawan menyelesaikan pekerjaan dan mengikuti peraturan yang
-                            telah dibuat manajemen perusahaan. Disiplin ketika membuat perencanaan
-                            pekerjaannya akan berpengaruh pada ketepatan waktu menyelesaikan
-                            tanggung jawab</p>
-                    </div>
-                </div>
-
-                <div class="col-xl-3 col-md-6 d-flex align-items-stretch mt-4 mt-xl-0 mb-4" data-aos="zoom-in"
-                    data-aos-delay="300">
-                    <div class="icon-box">
-                        <div class="icon"><i class="bx bx-tachometer"></i></div>
-                        <h4><a href="">Inisiatif dalam bekerja</a></h4>
-                        <p>Kriteria ini menilai apakah karyawan inisiatif untuk melakukan hal-hal baru yang memberikan
-                            hasil nyata. Karyawan yang punya
-                            inisiatif biasanya merupakan pekerja mandiri yang dapat menjalankan perannya tanpa perlu
-                            banyak supervisi dari atasan.</p>
-                    </div>
-                </div>
-
-                <div class="col-xl-3 col-md-6 d-flex align-items-stretch mt-4 mt-xl-0 mb-4" data-aos="zoom-in"
-                    data-aos-delay="400">
-                    <div class="icon-box">
-                        <div class="icon"><i class="bx bx-layer"></i></div>
-                        <h4><a href="">Leadership</a></h4>
-                        <p>Kriteria ini menilai apakah karyawan yang memiliki bakat menjadi pemimpin dan menggerakan
-                            serta memotivasi rekan kerjanya
-                            bisa menjadi poin penting dalam penilaian karyawan.</p>
-                    </div>
-                </div>
-
-                <div class="col-xl-3 col-md-6 d-flex align-items-stretch mt-4 mt-xl-0" data-aos="zoom-in"
-                    data-aos-delay="400">
-                    <div class="icon-box">
-                        <div class="icon"><i class="bx bx-layer"></i></div>
-                        <h4><a href="">Kerjasama tim</a></h4>
-                        <p>Kriteria ini menilai apakah karyawan menjalankan tugasnya dalam tim, bagaimana mereka
-                            berkomunikasi dengan atasan, menerima
-                            perintah dan menjalankannya, serta berkolaborasi dengan rekan kerja</p>
-                    </div>
-                </div>
-
-                <div class="col-xl-3 col-md-6 d-flex align-items-stretch mt-4 mt-xl-0" data-aos="zoom-in"
-                    data-aos-delay="400">
-                    <div class="icon-box">
-                        <div class="icon"><i class="bx bx-layer"></i></div>
-                        <h4><a href="">Kehadiran</a></h4>
-                        <p>Kriteria ini menunjukkan kepatuhan karyawan pada peraturan perusahaan mengenai waktu kerja
-                            dan kesadaran terhadap kewajibannya sebagai pekerja</p>
-                    </div>
-                </div>
-
-                <div class="col-xl-3 col-md-6 d-flex align-items-stretch mt-4 mt-xl-0" data-aos="zoom-in"
-                    data-aos-delay="400">
-                    <div class="icon-box">
-                        <div class="icon"><i class="bx bx-layer"></i></div>
-                        <h4><a href="">Tanggung jawab</a></h4>
-                        <p>Kriteria ini mengukur pemenuhan tanggung jawab dari peran yang dijalankan karyawan, mana yang
-                            sudah memenuhi harapan dan mana yang belum</p>
-                    </div>
-                </div>
-
-                <div class="col-xl-3 col-md-6 d-flex align-items-stretch mt-4 mt-xl-0" data-aos="zoom-in"
-                    data-aos-delay="400">
-                    <div class="icon-box">
-                        <div class="icon"><i class="bx bx-layer"></i></div>
-                        <h4><a href="">Komunikasi</a></h4>
-                        <p>Kriteria ini menilai apakah karyawan tersebut memiliki kemampuan untuk berkomunikasi
-                            secara memadai dengan rekan
-                            kerja, manajer, dan pelanggan</p>
-                    </div>
-                </div>
-
+                @endforeach
             </div>
 
         </div>
@@ -250,7 +172,7 @@
                                 karyawan tersebut
                             </p>
                         </div>
-                    </li> 
+                    </li>
                 </ul>
             </div>
 

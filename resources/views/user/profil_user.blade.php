@@ -140,6 +140,13 @@
             <div class="container-xxl flex-grow-1 container-p-y">
               <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Dashboard User /</span> Profile</h4>
 
+              @if (session()->has('warning'))
+                <div class="alert alert-danger" role="alert">
+                    {{ session('warning') }}
+
+                </div>
+            @endif
+
               <div class="row">
                 <div class="col-md-12">
                   <div class="card mb-4">
@@ -149,54 +156,93 @@
                     <div class="card-body">
                       <form id="formAccountSettings" method="POST" action="/profile/tambah">
                         @csrf
+
                         <div class="row">
                           <div class="mb-6 col-md-12">
-                            <label for="nama" class="form-label">Nama</label>
+                            <label for="nama" class="form-label ">Nama</label>
                             <input
-                              class="form-control"
+                              class="form-control @error('nama') is-invalid @enderror"
                               type="text"
                               id="nama"
                               name="nama"
                               placeholder="Nama"
                               autofocus
+                              value="{{ $profil->nama }}"
                             />
+                             @error('nama')
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+
+                                </div>
+                            @enderror
                           </div>
                           <div class="mb-3 col-md-6 mt-3">
-                            <label for="tanggal_masuk" class="form-label">Tanggal Masuk</label>
-                            <input type="date" class="form-control">
+                            <label for="tanggal_masuk" class="form-label ">Tanggal Masuk</label>
+                            <input type="date" name="tanggal_masuk" class="form-control @error('tanggal_masuk') is-invalid @enderror" value="{{ $profil->tanggal_masuk}}">
+                            @error('tanggal_masuk')
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
+                            @enderror
                           </div>
                           <div class="mb-3 col-md-6 mt-3">
-                            <label for="jenis_kelamin" class="form-label">Jenis Kelamin</label>
-                            <select id="jenis_kelamin" class="select2 form-select" name="gender">
+                            <label for="jenis_kelamin" class="form-label ">Jenis Kelamin</label>
+                            <select id="jenis_kelamin" class="select2 form-select @error('gender') is-invalid @enderror" name="gender" value="{{ $profil->gender }}">
                               <option value="Laki-Laki">Laki-Laki</option>
                               <option value="Perempuan">Perempuan</option>
                             </select>
+                            @error('gender')
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
+                            @enderror
                           </div>
                           <div class="mb-3 col-md-6">
                             <label for="tempat_Lahir" class="form-label">Tempat Lahir</label>
                             <input
                               type="text"
-                              class="form-control"
+                              class="form-control  @error('tempat_lahir') is-invalid @enderror"
                               id="tempat_Lahir"
                               name="tempat_lahir"
                               placeholder="Tempat Lahir"
+                              value="{{ $profil->tempat_lahir }}"
                             />
+                            @error('tempat_lahir')
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
+                            @enderror
                           </div>
                           <div class="mb-3 col-md-6">
-                            <label for="tanggal_lahir" class="form-label">Tanggal Lahir</label>
-                            <input type="date" class="form-control" name="tanggal_lahir">
+                            <label for="tanggal_lahir" class="form-label ">Tanggal Lahir</label>
+                            <input type="date" class="form-control @error('tanggal_lahir') is-invalid @enderror" name="tanggal_lahir" value="{{ $profil->tanggal_lahir }}">
+                                @error('tanggal_lahir')
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
+                            @enderror
                           </div>
                           <div class="mb-3 col-md-6">
-                            <label for="alamat" class="form-label">Alamat</label>
-                            <input type="text" class="form-control" id="alamat" name="alamat" placeholder="Alamat" />
+                            <label for="alamat" class="form-label ">Alamat</label>
+                            <input type="text" class="form-control @error('alamat') is-invalid @enderror" id="alamat" name="alamat" placeholder="Alamat" value="{{ $profil->alamat }}" />
+                                @error('alamat')
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
+                            @enderror
                           </div>
                           <div class="mb-3 col-md-6">
-                            <label for="role" class="form-label">Divisi</label>
-                            <select class="form-select" name="divisi_id">
+                            <label for="divisi_id" class="form-label ">Divisi</label>
+                            <select class="form-select @error('divisi_id') is-invalid @enderror" name="divisi_id" value="{{ $profil->divisi_id}}">
                                 @foreach ($divisis as $divisi)
-                                  <option value="{{ $divisi->id }}">{{ $divisi->nama_divisi }}</option>
+                                <option value="{{ $divisi->id }}">{{ $divisi->nama_divisi }}</option>
                                 @endforeach
                             </select>
+                            @error('divisi_id')
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
+                            @enderror
                           </div>
                           <div class="mb-3 col-md-6">
                             <label class="form-label" for="no_telepon">Nomor Telepon</label>
@@ -205,15 +251,31 @@
                                 type="text"
                                 id="no_telepon"
                                 name="no_telp"
-                                class="form-control"
+                                class="form-control @error('no_telp') is-invalid @enderror"
                                 placeholder="Nomor Telepon"
+                                value="{{ $profil->no_telp }}"
                               />
+                                @error('no_telp')
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
+                            @enderror
                             </div>
                           </div>
-                        </div>
+                          <div class="">
+                            <label class="form-label" for="user_id"></label>
+                            <div class="input-group input-group-merge">
+                              <input
+                                type="text"
+                                id="user_id"
+                                name="user_id"
+                                class="form-control"
+                                hidden
+                                value="{{ auth()->user()->id }}"
+                              />
+                            </div>
                         <div class="mt-2">
                           <button type="submit" class="btn btn-primary me-2">Save changes</button>
-                          <button type="reset" class="btn btn-outline-secondary">Cancel</button>
                         </div>
                       </form>
                     </div>

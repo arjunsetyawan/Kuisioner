@@ -1,11 +1,11 @@
 @extends('layouts.admin')
 @section('container')
     <div class="container-fluid">
-        <h1 class="h3 mb-2 text-gray-800">View Data User</h1>
+        <h1 class="h3 mb-2 text-gray-800">View Data Pertanyaan</h1>
         <p class="mb-4"></p>
         <div class="card shadow mb-4">
             <div class="card-header py-3">
-                <h6 class="m-0 font-weight-bold text-primary">Data User</h6>
+                <h6 class="m-0 font-weight-bold text-primary">Data Pertanyaan</h6>
             </div>
 
             @if (session()->has('success'))
@@ -24,17 +24,16 @@
 
             <div class="card-body">
                 @can('admin')
-                    <a href="/datauser/create" class="mb-4 btn btn-primary">Tambah data user</a>
+                    <a href="/datapertanyaan/create" class="mb-4 btn btn-primary">Tambah data Pertanyaan</a>
                 @endcan
                 <div class="table-responsive">
                     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                         <thead>
                             <tr>
                                 <th>No</th>
-                                <th>Username</th>
-                                <th>Email</th>
-                                <th>Role</th>
-                                <th>Status</th>
+                                <th>Kriteria</th>
+                                <th>Pertanyaan</th>
+                                <th>Periode</th>
                                 @can('admin')
                                     <th style="width: 10%;">Action</th>
                                 @endcan
@@ -42,24 +41,18 @@
                         </thead>
                         <tfoot>
                             @php $no = 1; @endphp
-                            @foreach ($users as $data)
+                            @foreach ($pertanyaan as $data)
                                 <tr>
                                     <th>{{ $no++ }}</th>
-                                    <td>{{ $data->username }}</td>
-                                    <td>{{ $data->email }}</td>
-                                    <td>
-                                        @if ($data->role_id == 2)
-                                            User
-                                        @elseif($data->role_id == 1)
-                                            Admin
-                                        @endif
-                                    </td>
-                                    <th>{{ $data->status }}</th>
+                                    <td>{{ $data->kriteria_id }}</td>
+                                    <td>{{ $data->nama_pertanyaan }}</td>
+                                    <td>{{ $data->periode_id }}</td>
                                     @can('admin')
                                         <td>
-                                            <a href="/datauser/edit/{{ $data->id }}" class="btn btn-primary"><i
+                                            <a href="/dataapertanyaan/edit/{{ $data->id }}" class="btn btn-primary"><i
                                                     class="bi bi-pencil-square"></i></a>
-                                            <form action="/datauser/delete/{{ $data->id }}" method="POST" class="d-inline">
+                                            <form action="/datapertanyaan/delete/{{ $data->id }}" method="POST"
+                                                class="d-inline">
                                                 {{-- @method('delete') --}}
                                                 @csrf
                                                 <button class="btn btn-danger" type="submit"

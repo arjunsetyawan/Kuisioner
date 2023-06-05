@@ -10,8 +10,8 @@
                         @csrf
                         <div class="mb-3">
                             <label for="username"
-                                class="form-label @error('username') is-invalid @enderror">Username</label>
-                            <input type="text" class="form-control" id="username" name="username" required
+                                class="form-label ">Username</label>
+                            <input type="text" class="form-control @error('username') is-invalid @enderror" id="username" name="username" required
                                 value="{{ old('username') }}" autofocus>
                             @error('username')
                                 <div class="invalid-feedback">
@@ -45,6 +45,14 @@
                                 @foreach ($roles as $role)
                                     <option value="{{ $role->id }}">{{ $role->role }}</option>
                                 @endforeach
+                            </select>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="status" class="form-label">Status</label>
+                            <select class="form-select" name="status">
+                                    <option value="Active">Active</option>
+                                    <option value="Inactive">Inactive</option>
                             </select>
                         </div>
                         <button type="submit" class="btn btn-primary">Submit</button>

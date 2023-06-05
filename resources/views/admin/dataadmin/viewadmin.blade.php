@@ -34,6 +34,7 @@
                                 <th>Username</th>
                                 <th>Email</th>
                                 <th>Role</th>
+                                <th>Status</th>
                                 @can('admin')
                                     <th style="width: 10%;">Action</th>
                                 @endcan
@@ -53,6 +54,7 @@
                                             Admin
                                         @endif
                                     </td>
+                                    <td>{{ $data->status }}</td>
                                     @can('admin')
                                         <td>
                                             <a href="/dataadmin/edit/{{ $data->id }}" class="btn btn-primary"><i

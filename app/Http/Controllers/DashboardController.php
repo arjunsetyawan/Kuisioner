@@ -17,18 +17,23 @@ class DashboardController extends Controller
     public function index()
     {
         if (Auth::user()) {
-            if (Auth::user()->role_id == 1) {
+            if (Auth::user()->role_id == 1 && Auth::user()->status == "Active") {
                 $users = DB::table('users')->count();
                 $divisi = DB::table('divisi')->count();
                 $kriteria = DB::table('kriteria')->count();
                 return view('admin.index', ['users' => $users, 'divisi' => $divisi, 'kriteria' => $kriteria]);
-            } elseif (Auth::user()->role_id == 3) {
+            } elseif (Auth::user()->role_id == 3 && Auth::user()->status == "Active") {
                 $users = DB::table('users')->count();
                 $divisi = DB::table('divisi')->count();
                 $kriteria = DB::table('kriteria')->count();
                 return view('admin.index', ['users' => $users, 'divisi' => $divisi, 'kriteria' => $kriteria]);
             }
-            return view('user.index');
+            elseif(Auth::user()->role_id == 2 && Auth::user()->status == "Active"){
+                $data = DB::table('kriteria')
+                ->get();
+                return view('user.index' , ['data' => $data]);
+            }
+            return view('auth.login');
         }
         $data = DB::table('kriteria')
             ->get();

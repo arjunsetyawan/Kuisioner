@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 
+use function PHPSTORM_META\map;
 
 class DataUserController extends Controller
 {
@@ -47,7 +48,8 @@ class DataUserController extends Controller
             'username' => 'required|min:5',
             'email' => 'required|email:dns',
             'password' => 'required|min:8|max:255',
-            'role_id' => 'required'
+            'role_id' => 'required',
+            'status' => 'required'
         ]);
         $validateData['password'] = Hash::make($validateData['password']);
         DataUser::create($validateData);
@@ -90,7 +92,8 @@ class DataUserController extends Controller
             'username' => 'required|min:5',
             'email' => 'required|email:dns',
             'password' => 'required|min:8|max:255',
-            'role_id' => 'required'
+            'role_id' => 'required',
+            'status' => 'required'
         ]);
         $validateData['password'] = Hash::make($validateData['password']);
         $id->update($validateData);

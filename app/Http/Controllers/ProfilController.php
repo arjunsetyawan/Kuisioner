@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\DataDivisi;
 use App\Models\Profil;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class ProfilController extends Controller
 {
@@ -15,7 +16,10 @@ class ProfilController extends Controller
      */
     public function index()
     {
-        return view('user.profil_user', ['divisis' => DataDivisi::all()]);
+        $profil = DB::table('karyawan')
+            ->where('user_id', '=', auth()->user()->id)
+            ->first();
+        return view('user.profil_user', ['divisis' => DataDivisi::all() , 'profil' => $profil]);
     }
 
     /**
@@ -36,18 +40,36 @@ class ProfilController extends Controller
      */
     public function store(Request $request)
     {
-        $validateData = $request->validate([
-            'nama' => 'required|max:255',
-            'tanggal_masuk' => 'required',
-            'tempat_lahir' => 'required|max:255',
-            'tanggal_lahir' => 'required',
-            'gender' => 'required',
-            'dvisi_id' => 'required',
-            'no_telp' => 'required'
-        ]);
-        dd($validateData);
-        // Profil::create($validateData);
-        // return redirect()->route('viewprofil')->with('success', 'Profil berhasil ditambahkan!');
+        $profile = Profil::where('user_id', '=', auth()->user()->id)->first();
+        if(!$profile) {
+            $validateData = $request->validate([
+               'nama' => 'required',
+               'tanggal_masuk' => 'required',
+               'tempat_lahir' => 'required',
+               'tanggal_lahir' => 'required',
+               'gender' => 'required',
+               'divisi_id' => 'required',
+               'no_telp' => 'required',
+               'alamat' => 'required',
+               'user_id' => 'required',
+           ]);
+           Profil::create($validateData);
+        } else {
+            $validateData = $request->validate([
+                'nama' => 'required',
+                'tanggal_masuk' => 'required',
+                'tempat_lahir' => 'required',
+                'tanggal_lahir' => 'required',
+                'gender' => 'required',
+                'divisi_id' => 'required',
+                'no_telp' => 'required',
+                'alamat' => 'required',
+                'user_id' => 'required',
+            ]);
+            $profile->update($validateData);
+        }
+
+        return redirect()->route('viewprofil')->with('success', 'Profil berhasil ditambahkan!');
     }
     /**
      * Display the specified resource.
