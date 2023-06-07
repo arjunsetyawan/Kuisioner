@@ -118,7 +118,10 @@
                     </p>
                 </div>
                 <div class="col-lg-3 cta-btn-container text-center">
-                    <a class="cta-btn align-middle" href="#">Click Here !</a>
+                @can('user')
+                    <a class="cta-btn align-middle" href="/kuisioner">Click Here !</a>
+                @endcan
+                     <a class="cta-btn align-middle" href="/login">Click Here !</a>
                 </div>
             </div>
 

@@ -8,4 +8,12 @@ use Illuminate\Database\Eloquent\Model;
 class Pertanyaan extends Model
 {
     use HasFactory;
+    protected $table = 'pertanyaan';
+    protected $fillable = ['kriteria_id', 'nama_pertanyaan', 'periode_id'];
+    public $timestamps = false;
+
+    public function DataKriteria()
+    {
+        return $this->belongsTo(DataKriteria::class);
+    }
 }

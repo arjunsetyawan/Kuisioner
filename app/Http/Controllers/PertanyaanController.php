@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\DataKriteria;
+use App\Models\Periode;
 use App\Models\Pertanyaan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -16,7 +18,7 @@ class PertanyaanController extends Controller
     public function index()
     {
         $pertanyaan = DB::table('pertanyaan')
-        ->get();
+        ->paginate(5);
         return view('admin.datapertanyaan.viewpertanyaan', ['pertanyaan' => $pertanyaan]);
     }
 
@@ -27,7 +29,7 @@ class PertanyaanController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.datapertanyaan.tambahpertanyaan', ['kriterias' => DataKriteria::all(), 'periodes' => Periode::all()]);
     }
 
     /**
@@ -38,7 +40,14 @@ class PertanyaanController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+        $validateData = $request->validate([
+            'kriteria_id' => 'required',
+            'nama_pertanyaan' => 'required',
+            'periode_id' => 'required'
+        ]);
+        Pertanyaan::create($validateData);
+        return redirect()->route('viewpertanyaan')->with('success', 'Pertanyaan baru telah ditambahkan!');
     }
 
     /**
@@ -58,9 +67,11 @@ class PertanyaanController extends Controller
      * @param  \App\Models\Pertanyaan  $pertanyaan
      * @return \Illuminate\Http\Response
      */
-    public function edit(Pertanyaan $pertanyaan)
+    public function edit($id)
     {
-        //
+        $data = Pertanyaan::find($id);
+        // dd($data);
+        return view('admin.datapertanyaan.updatepertanyaan', ['kriterias' => DataKriteria::all(), 'periodes' => Periode::all() , 'data' => $data]);
     }
 
     /**
@@ -70,9 +81,17 @@ class PertanyaanController extends Controller
      * @param  \App\Models\Pertanyaan  $pertanyaan
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Pertanyaan $pertanyaan)
+    public function update(Request $request, Pertanyaan $id)
     {
-        //
+        $validateData = $request->validate([
+            'kriteria_id' => 'required',
+            'nama_pertanyaan' => 'required',
+            'periode_id' => 'required'
+        ]);
+
+        // dd($validateData);
+        $id->update($validateData);
+        return redirect()->route('viewpertanyaan')->with('sukses', 'Data Pertanyaan berhasil diupdate!');
     }
 
     /**
@@ -81,8 +100,9 @@ class PertanyaanController extends Controller
      * @param  \App\Models\Pertanyaan  $pertanyaan
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Pertanyaan $pertanyaan)
+    public function destroy(Pertanyaan $id)
     {
-        //
+        Pertanyaan::destroy($id->id);
+        return redirect()->route('viewpertanyaan')->with('sukses', 'Data Pertanyaan berhasil dihapus!');
     }
 }

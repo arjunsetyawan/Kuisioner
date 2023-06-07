@@ -83,7 +83,7 @@ class DataKriteriaController extends Controller
             'kriteria' => 'required',
             'detail_kriteria' => 'required'
         ]);
-        // dd($id);
+        // dd($d);
         $id->update($validateData);
         return redirect()->route('viewkriteria')->with('success', 'Sukses update!');
     }

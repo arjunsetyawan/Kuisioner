@@ -9,51 +9,43 @@
                     <form class="col-lg-8" method="post" action="/datapertanyaan/tambah">
                         @csrf
                         <div class="mb-3">
-                            <label for="username"
-                                class="form-label ">Username</label>
-                            <input type="text" class="form-control @error('username') is-invalid @enderror" id="username" name="username" required
-                                value="{{ old('username') }}" autofocus>
-                            @error('username')
-                                <div class="invalid-feedback">
-                                    {{ $message }}
-                                </div>
-                            @enderror
-                        </div>
-                        <div class="mb-3">
-                            <label for="email" class="form-label">Email</label>
-                            <input type="text" class="form-control @error('email') is-invalid @enderror" id="email"
-                                name="email" required value="{{ old('email') }}">
-                            @error('email')
-                                <div class="invalid-feedback">
-                                    {{ $message }}
-                                </div>
-                            @enderror
-                        </div>
-                        <div class="mb-3">
-                            <label for="password" class="form-label">Password</label>
-                            <input type="password" class="form-control @error('password') is-invalid @enderror"
-                                id="password" name="password" required>
-                            @error('password')
-                                <div class="invalid-feedback">
-                                    {{ $message }}
-                                </div>
-                            @enderror
-                        </div>
-                        <div class="mb-3">
-                            <label for="role" class="form-label">Role</label>
-                            <select class="form-select" name="role_id">
-                                @foreach ($roles as $role)
-                                    <option value="{{ $role->id }}">{{ $role->role }}</option>
+                            <label for="kriteria" class="form-label">Kriteria</label>
+                            <select class="form-select form-control @error('kriteria') is-invalid @enderror" name="kriteria_id">
+                                @foreach ($kriterias as $kriteria)
+                                    <option value="{{ $kriteria->id }}">{{ $kriteria->kriteria }}</option>
                                 @endforeach
                             </select>
                         </div>
-
+                        <div>
+                            @error('kriteria')
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
+                            @enderror
+                        </div>
                         <div class="mb-3">
-                            <label for="status" class="form-label">Status</label>
-                            <select class="form-select" name="status">
-                                    <option value="Active">Active</option>
-                                    <option value="Inactive">Inactive</option>
+                            <label for="nama_pertanyaan" class="form-label">Pertanyaan</label>
+                            <input type="text" class="form-control @error('nama_pertanyaan') is-invalid @enderror" id="nama_pertanyaan"
+                                name="nama_pertanyaan" required value="{{ old('nama_pertanyaan') }}">
+                            @error('nama_pertanyaan')
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
+                            @enderror
+                        </div>
+                        <div class="mb-3">
+                            <label for="periode" class="form-label">Periode</label>
+                            <select class="form-select form-control @error('periode_id') is-invalid @enderror" name="periode_id">
+                                @foreach ($periodes as $periode)
+                                    <option value="{{ $periode->id }}">{{ $periode->bulan }}</option>
+                                @endforeach
                             </select>
+                        </div>
+                            @error('periode')
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
+                            @enderror
                         </div>
                         <button type="submit" class="btn btn-primary">Submit</button>
                     </form>

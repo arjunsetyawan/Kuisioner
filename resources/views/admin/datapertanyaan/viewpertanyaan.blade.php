@@ -44,12 +44,56 @@
                             @foreach ($pertanyaan as $data)
                                 <tr>
                                     <th>{{ $no++ }}</th>
-                                    <td>{{ $data->kriteria_id }}</td>
+                                    <td>
+                                        @if ($data->kriteria_id == 1)
+                                            Attitude
+                                        @elseif($data->kriteria_id == 2)
+                                            Kedisiplinan kerja
+                                        @elseif($data->kriteria_id == 3)
+                                            Inisiatif dalam bekerja
+                                        @elseif($data->kriteria_id == 4)
+                                            Leadership
+                                        @elseif($data->kriteria_id == 5)
+                                            Kerjasama tim
+                                        @elseif($data->kriteria_id == 6)
+                                            Kehadiran
+                                        @elseif($data->kriteria_id == 7)
+                                            Tanggung jawab
+                                        @elseif($data->kriteria_id == 8)
+                                            Komunikasi
+                                        @endif
+                                    </td>
                                     <td>{{ $data->nama_pertanyaan }}</td>
-                                    <td>{{ $data->periode_id }}</td>
+                                    <td>
+                                        @if ($data->periode_id == 1)
+                                            Januari
+                                        @elseif($data->periode_id == 2)
+                                            Februari
+                                        @elseif($data->periode_id == 3)
+                                            Maret
+                                        @elseif($data->periode_id == 4)
+                                            April
+                                        @elseif($data->periode_id == 5)
+                                            Mei
+                                        @elseif($data->periode_id == 6)
+                                            Juni
+                                        @elseif($data->periode_id == 7)
+                                            Juli
+                                        @elseif($data->periode_id == 8)
+                                            Agustus
+                                        @elseif($data->periode_id == 9)
+                                            September
+                                        @elseif($data->periode_id == 10)
+                                            Oktober
+                                        @elseif($data->periode_id == 11)
+                                            November
+                                        @elseif($data->periode_id == 12)
+                                            Desember
+                                        @endif
+                                    </td>
                                     @can('admin')
                                         <td>
-                                            <a href="/dataapertanyaan/edit/{{ $data->id }}" class="btn btn-primary"><i
+                                            <a href="/datapertanyaan/edit/{{ $data->id }}" class="btn btn-primary"><i
                                                     class="bi bi-pencil-square"></i></a>
                                             <form action="/datapertanyaan/delete/{{ $data->id }}" method="POST"
                                                 class="d-inline">
@@ -69,4 +113,10 @@
             </div>
         </div>
     </div>
+
+    <div class="d-flex justify-content-end mr-4">
+        {{ $pertanyaan->links() }}
+
+    </div>
+
 @endsection

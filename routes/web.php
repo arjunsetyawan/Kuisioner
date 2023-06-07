@@ -7,6 +7,7 @@ use App\Http\Controllers\DataUserController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DataAdminController;
+use App\Http\Controllers\KuisionerController;
 use App\Http\Controllers\DataDivisiController;
 use App\Http\Controllers\PertanyaanController;
 use App\Http\Controllers\DataKriteriaController;
@@ -34,15 +35,17 @@ Route::post('/logout', [LoginController::class, 'logout']);
 Route::get('/register', [RegisterController::class, 'index'])->middleware('guest');
 Route::post('/register', [RegisterController::class, 'store']);
 
+//User -> Profil
 Route::middleware(['auth', 'IsUser'])->group(function () {
 
     Route::get('/profile', [ProfilController::class, 'index'])->name('viewprofil');
     Route::post('/profile/tambah', [ProfilController::class, 'store']);
+
+    //User -> Kuisioner (harus isi profil dulu)
     Route::middleware(['CekProfile'])->group(function () {
-        Route::get('/kuisioner' , function(){
-            dd("coba");
-            // return view('user.kuisioner');
-        })->name('kuisioner');
+
+        Route::get('/kuisioner', [KuisionerController::class, 'index'])->name('viewkuisioner');
+
     });
 });
 
