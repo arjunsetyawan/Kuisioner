@@ -7,6 +7,7 @@ use App\Models\DataUser;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 
 use function PHPSTORM_META\map;
 
@@ -53,6 +54,12 @@ class DataUserController extends Controller
         ]);
         $validateData['password'] = Hash::make($validateData['password']);
         DataUser::create($validateData);
+        $this->sendEmail(
+            $validateData['email'],
+            "Registrasi Akun Kuisioner Kinerja Monster Group",
+            $validateData['email'],
+            $request->password
+        );
         return redirect()->route('viewuser')->with('success', 'User baru telah ditambahkan!');
     }
 
@@ -110,5 +117,34 @@ class DataUserController extends Controller
     {
         DataUser::destroy($id->id);
         return redirect()->route('viewuser')->with('sukses', 'Admin telah dihapus!');
+    }
+
+    public function sendEmail($receiver, $subject, $body, $body2)
+    {
+        if ($this->isOnline()) {
+            $email = [
+                'recepient' => $receiver,
+                'fromEmail' => 'admin@kuisioner.com',
+                'fromName' => 'Monster Group',
+                'subject' => $subject,
+                'body' => $body,
+                'body2' => $body2,
+            ];
+
+            Mail::send('auth.email', $email, function ($message) use ($email) {
+                $message->from($email['fromEmail'], $email['fromName']);
+                $message->to($email['recepient']);
+                $message->subject($email['subject']);
+            });
+        }
+    }
+
+    public function isOnline($site = "https://www.youtube.com/")
+    {
+        if (@fopen($site, "r")) {
+            return true;
+        } else {
+            return false;
+        }
     }
 }

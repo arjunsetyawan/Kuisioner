@@ -63,10 +63,10 @@ class DataKriteriaController extends Controller
      * @param  \App\Models\DataKriteria  $dataKriteria
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($id_kriteria)
     {
-        $data = DataKriteria::find($id);
-        // dd($id);
+        $data = DataKriteria::find($id_kriteria);
+        // dd($data);
         return view('admin.datakriteria.updatekriteria', ['data' => $data]);
     }
 
@@ -77,14 +77,14 @@ class DataKriteriaController extends Controller
      * @param  \App\Models\DataKriteria  $dataKriteria
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, DataKriteria $id)
+    public function update(Request $request, DataKriteria $id_kriteria)
     {
         $validateData = $request->validate([
             'kriteria' => 'required',
             'detail_kriteria' => 'required'
         ]);
         // dd($d);
-        $id->update($validateData);
+        $id_kriteria->update($validateData);
         return redirect()->route('viewkriteria')->with('success', 'Sukses update!');
     }
 
@@ -94,9 +94,9 @@ class DataKriteriaController extends Controller
      * @param  \App\Models\DataKriteria  $dataKriteria
      * @return \Illuminate\Http\Response
      */
-    public function destroy(DataKriteria $id)
+    public function destroy(DataKriteria $id_kriteria)
     {
-        DataKriteria::destroy($id->id);
+        DataKriteria::destroy($id_kriteria->id_kriteria);
         return redirect()->route('viewkriteria')->with('sukses', 'Kriteria telah dihapus!');
     }
 }

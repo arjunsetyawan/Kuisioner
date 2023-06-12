@@ -41,14 +41,14 @@
                         <tfoot>
                             @foreach ($kriteria as $data)
                                 <tr>
-                                    <td>{{ $data->id }}</td>
+                                    <td>{{ $data->id_kriteria }}</td>
                                     <td>{{ $data->kriteria }}</td>
                                     <td>{{ $data->detail_kriteria }}</td>
                                     @can('admin')
                                         <td>
-                                            <a href="/datakriteria/edit/{{ $data->id }}" class="btn btn-primary"><i
+                                            <a href="/datakriteria/edit/{{ $data->id_kriteria }}" class="btn btn-primary"><i
                                                     class="bi bi-pencil-square"></i></a>
-                                            <form action="/datakriteria/delete/{{ $data->id }}" method="POST"
+                                            <form action="/datakriteria/delete/{{ $data->id_kriteria }}" method="POST"
                                                 class="d-inline">
                                                 {{-- @method('delete') --}}
                                                 @csrf

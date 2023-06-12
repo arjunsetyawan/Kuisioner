@@ -149,20 +149,106 @@
 
               <div class="row">
                 <div class="col-md-12">
-                  <div class="card mb-4">
-                    <h5 class="card-header">Detail Profil {{ auth()->user()->username }}</h5>
-                    <!-- Account -->
-                    <hr class="my-0" />
-                    <div class="card-body">
-                      <form id="formAccountSettings" method="POST" action="/profile/tambah">
-                        @csrf
-                      </form>
+                  <div class="card ms-4" style="width:97%">
+                    <h5 class="card-header">Penilaian untuk user :</h5>
+                    <form id="formAccountSettings" method="POST" action="/kuisioner/tambah">
+                    <div class="col-6 ms-4 mb-4">
+                            <select class="form-select" name="karyawan_id">
+                                @foreach ($users as $data )
+                                <option value="{{ $data->id }}">{{ $data->username }}</option>
+                                @endforeach
+                            </select>
+                        </div>
                     </div>
-                    <!-- /Account -->
-                  </div>
+                    <!-- Account -->
+                    <div class="card-body">
+
+                        @csrf
+
+                        @foreach ($pertanyaan as $data )
+
+                        <div class="card mt-4" style="padding: 0px 20px">
+
+                            <div class="card-header text-dark">
+                            {{ $data->kriteria }}
+
+                            </div>
+                        <div class="card-body">
+                            <h5 class="card-title">{{ $data->nama_pertanyaan }}</h5>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="{{ $data->id }}"
+                                    id="flexRadioDefault1" value="4" />
+                                <label class="form-check-label" for="flexRadioDefault1">
+                                    Sangat Baik
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="{{ $data->id }}"
+                                    id="flexRadioDefault2" value="3" />
+                                <label class="form-check-label" for="flexRadioDefault2">
+                                Baik
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="{{ $data->id }}"
+                                    id="flexRadioDefault3" value="2" />
+                                <label class="form-check-label" for="flexRadioDefault3">
+                                    Cukup
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="{{ $data->id }}"
+                                    id="flexRadioDefault4" value="1" />
+                                <label class="form-check-label" for="flexRadioDefault4">
+                                    Kurang
+                                </label>
+                            </div>
+
+                            <input type="hidden" class="form-control" id="periode" value="{{ $data->periode_id }}" name="periode">
+                    </div>
                 </div>
-              </div>
+            @endforeach
+
+            <div class="mt-3">
+                <label for="exampleFormControlTextarea1" class="form-label">Kritik dan Saran</label>
+                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="value_essay"></textarea>
             </div>
+
+
+
+
+
+            <div class="d-flex justify-content-end">
+                <button type="button" class="btn btn-primary mt-4 mb-5 me-3 " data-bs-toggle="modal"
+                    data-bs-target="#submit">Selesai</button>
+            </div>
+
+            {{-- MODAL SUBMIT --}}
+            <div class="modal
+                    fade" id="submit" tabindex="-1" aria-labelledby="ModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Peringatan !</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <p>Apakah anda yakin ingin submit pengerjaan ?</p>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+
+                            <button type="submit" class="btn btn-primary"> <span class="tf-icons bx"></span>Submit</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+
+
             <!-- / Content -->
 
             <!-- Footer -->

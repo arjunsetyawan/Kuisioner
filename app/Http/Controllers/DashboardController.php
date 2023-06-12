@@ -21,17 +21,18 @@ class DashboardController extends Controller
                 $users = DB::table('users')->count();
                 $divisi = DB::table('divisi')->count();
                 $kriteria = DB::table('kriteria')->count();
-                return view('admin.index', ['users' => $users, 'divisi' => $divisi, 'kriteria' => $kriteria]);
+                $pertanyaan = DB::table('pertanyaan')->count();
+                return view('admin.index', ['users' => $users, 'divisi' => $divisi, 'kriteria' => $kriteria, 'pertanyaan' => $pertanyaan]);
             } elseif (Auth::user()->role_id == 3 && Auth::user()->status == "Active") {
                 $users = DB::table('users')->count();
                 $divisi = DB::table('divisi')->count();
                 $kriteria = DB::table('kriteria')->count();
-                return view('admin.index', ['users' => $users, 'divisi' => $divisi, 'kriteria' => $kriteria]);
-            }
-            elseif(Auth::user()->role_id == 2 && Auth::user()->status == "Active"){
+                $pertanyaan = DB::table('pertanyaan')->count();
+                return view('admin.index', ['users' => $users, 'divisi' => $divisi, 'kriteria' => $kriteria, 'pertanyaan' => $pertanyaan]);
+            } elseif (Auth::user()->role_id == 2 && Auth::user()->status == "Active") {
                 $data = DB::table('kriteria')
-                ->get();
-                return view('user.index' , ['data' => $data]);
+                    ->get();
+                return view('user.index', ['data' => $data]);
             }
             return view('auth.login');
         }

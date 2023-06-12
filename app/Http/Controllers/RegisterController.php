@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Ajuan;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 
 class RegisterController extends Controller
 {
@@ -15,7 +17,7 @@ class RegisterController extends Controller
      */
     public function index()
     {
-        return view('auth.register');
+        return view('auth.login');
     }
 
     /**
@@ -37,15 +39,16 @@ class RegisterController extends Controller
     {
         $validateData = $request->validate([
             'username' => 'required|min:5',
-            'email' => 'required|email:dns',
+            'email' => 'required|email:dns|unique:ajuan,email',
             'password' => 'required|min:8|max:255',
-            'role_id' => 'required'
+            'role_id' => 'required',
 
         ]);
-        $validateData['password'] = Hash::make($validateData['password']);
-        User::create($validateData);
-        $request->session()->flash('success', 'Registration succesfull! Please login!');
-        return redirect('/user/login');
+        $validateData['status_akun'] = 'Inactive';
+        $validateData['status_ajuan'] = 'Menunggu Admin';
+        Ajuan::create($validateData);
+        $request->session()->flash('success', 'Ajuan Berhasil, silahkan tunggu konfirmasi dari admin');
+        return view('auth.login');
     }
 
     /**

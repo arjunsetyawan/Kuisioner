@@ -116,7 +116,6 @@
 
     <div class="d-flex justify-content-end mr-4">
         {{ $pertanyaan->links() }}
-
     </div>
 
 @endsection

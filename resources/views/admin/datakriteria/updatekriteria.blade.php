@@ -6,7 +6,7 @@
         <div class="card shadow mb-4">
             <div class="card-body">
                 <div class="table-responsive">
-                    <form class="col-lg-8" method="post" action="/datakriteria/update/{{ $data->id }}">
+                    <form class="col-lg-8" method="post" action="/datakriteria/update/{{ $data->id_kriteria }}">
                         @csrf
                         <div class="mb-3">
                             <label for="kriteria"

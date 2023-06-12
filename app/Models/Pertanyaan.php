@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\DataKriteria;
 
 class Pertanyaan extends Model
 {
@@ -12,7 +13,7 @@ class Pertanyaan extends Model
     protected $fillable = ['kriteria_id', 'nama_pertanyaan', 'periode_id'];
     public $timestamps = false;
 
-    public function DataKriteria()
+    public function datakriteria()
     {
         return $this->belongsTo(DataKriteria::class);
     }

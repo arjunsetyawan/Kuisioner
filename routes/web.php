@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AjuanController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\ProfilController;
 use App\Http\Controllers\DataUserController;
@@ -45,7 +46,7 @@ Route::middleware(['auth', 'IsUser'])->group(function () {
     Route::middleware(['CekProfile'])->group(function () {
 
         Route::get('/kuisioner', [KuisionerController::class, 'index'])->name('viewkuisioner');
-
+        Route::post('/kuisioner/tambah', [KuisionerController::class, 'store']);
     });
 });
 
@@ -79,9 +80,9 @@ Route::middleware(['auth', 'IsAdmin'])->group(function () {
     Route::get('/viewkriteria', [DataKriteriaController::class, 'index'])->name('viewkriteria');
     Route::get('/datakriteria/create', [DataKriteriaController::class, 'create'])->name('createkriteria');
     Route::post('/datakriteria/tambah', [DataKriteriaController::class, 'store']);
-    Route::get('/datakriteria/edit/{id}', [DataKriteriaController::class, 'edit'])->name('editkriteria');
-    Route::post('/datakriteria/update/{id}', [DataKriteriaController::class, 'update'])->name('updatekriteria');
-    Route::post('/datakriteria/delete/{id}', [DataKriteriaController::class, 'destroy'])->name('deletekriteria');
+    Route::get('/datakriteria/edit/{id_kriteria}', [DataKriteriaController::class, 'edit'])->name('editkriteria');
+    Route::post('/datakriteria/update/{id_kriteria}', [DataKriteriaController::class, 'update'])->name('updatekriteria');
+    Route::post('/datakriteria/delete/{id_kriteria}', [DataKriteriaController::class, 'destroy'])->name('deletekriteria');
 
     //Admin -> Data Pertanyaan
     Route::get('/viewpertanyaan', [PertanyaanController::class, 'index'])->name('viewpertanyaan');
@@ -90,6 +91,9 @@ Route::middleware(['auth', 'IsAdmin'])->group(function () {
     Route::get('/datapertanyaan/edit/{id}', [PertanyaanController::class, 'edit'])->name('editpertanyaan');
     Route::post('/datapertanyaan/update/{id}', [PertanyaanController::class, 'update'])->name('updatepertanyaan');
     Route::post('/datapertanyaan/delete/{id}', [PertanyaanController::class, 'destroy'])->name('deletepertanyaan');
+
+    //Admin -> Data Ajuan
+    Route::get('/viewajuan', [AjuanController::class, 'index'])->name('viewajuan');
 });
 
 Route::middleware(['auth', 'IsHRD'])->group(function () {
