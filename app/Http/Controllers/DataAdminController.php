@@ -42,7 +42,7 @@ class DataAdminController extends Controller
     public function store(Request $request)
     {
         $validateData = $request->validate([
-            'username' => 'required|min:5',
+            'nama' => 'required|min:5',
             'email' => 'required|email:dns',
             'password' => 'required|min:8|max:255',
             'role_id' => 'required',
@@ -86,7 +86,7 @@ class DataAdminController extends Controller
     public function update(Request $request, DataAdmin $id)
     {
         $validateData = $request->validate([
-            'username' => 'required|min:5',
+            'nama' => 'required|min:5',
             'email' => 'required|email:dns',
             'password' => 'required|min:8|max:255',
             'role_id' => 'required',

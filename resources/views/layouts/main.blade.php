@@ -15,9 +15,7 @@
     <link href="{!! asset('img/dokumen.png') !!}" rel="shortcut icon">
 
     <!-- Google Fonts -->
-    <link
-        href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Jost:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Jost:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
 
     <!-- Vendor CSS Files -->
     <link href="{!! asset('vendor/aos/aos.css') !!}" rel="stylesheet">
@@ -46,38 +44,36 @@
             <nav id="navbar" class="navbar">
                 <ul>
                     @auth
-                        <li><a class="nav-link scrollto active" href="#hero">Home</a></li>
-                        <li><a class="nav-link scrollto" href="#about">About</a></li>
-                        {{-- @can('admin') --}}
-                        <li><a class="nav-link scrollto" href="#kriteria">Kriteria</a></li>
-                        {{-- @endcan --}}
-                        <li><a class="nav-link scrollto" href="#kuisioner">Kuisioner</a></li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
-                                aria-expanded="false">
-                                Welcome back, {{ auth()->user()->username }}
-                            </a>
-                            <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" style="font-size: 15px;" href="/profile">Profile<i
-                                            class="bi bi-person-fill"></i></a>
-                                </li>
-                                <li>
-                                    <hr class="dropdown-divider">
-                                </li>
-                                <li>
-                                    <form action="/logout" method="post">
-                                        @csrf
-                                        <button type="submit" class="dropdown-item">Logout</button>
-                                    </form>
-                                </li>
-                            </ul>
-                        </li>
+                    <li><a class="nav-link scrollto active" href="#hero">Home</a></li>
+                    <li><a class="nav-link scrollto" href="#about">About</a></li>
+                    {{-- @can('admin') --}}
+                    <li><a class="nav-link scrollto" href="#kriteria">Kriteria</a></li>
+                    {{-- @endcan --}}
+                    <li><a class="nav-link scrollto" href="#kuisioner">Kuisioner</a></li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Welcome back, {{ auth()->user()->nama }}
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" style="font-size: 15px;" href="/profile">Profile<i class="bi bi-person-fill"></i></a>
+                            </li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li>
+                                <form action="/logout" method="post">
+                                    @csrf
+                                    <button type="submit" class="dropdown-item">Logout</button>
+                                </form>
+                            </li>
+                        </ul>
+                    </li>
                     @else
-                        <li><a class="nav-link scrollto active" href="#hero">Home</a></li>
-                        <li><a class="nav-link scrollto" href="#about">About</a></li>
-                        <li><a class="nav-link scrollto" href="#kriteria">Kriteria</a></li>
-                        <li><a class="nav-link scrollto" href="#kuisioner">Kuisioner</a></li>
-                        <li><a class="getstarted scrollto" href="/login">Login</a></li>
+                    <li><a class="nav-link scrollto active" href="#hero">Home</a></li>
+                    <li><a class="nav-link scrollto" href="#about">About</a></li>
+                    <li><a class="nav-link scrollto" href="#kriteria">Kriteria</a></li>
+                    <li><a class="nav-link scrollto" href="#kuisioner">Kuisioner</a></li>
+                    <li><a class="getstarted scrollto" href="/login">Login</a></li>
                     @endauth
                 </ul>
                 <i class="bi bi-list mobile-nav-toggle"></i>
@@ -145,8 +141,7 @@
     </footer><!-- End Footer -->
 
     <div id="preloader"></div>
-    <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
-            class="bi bi-arrow-up-short"></i></a>
+    <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
     <!-- Vendor JS Files -->
     <script src="{!! asset('vendor/aos/aos.js') !!}"></script>

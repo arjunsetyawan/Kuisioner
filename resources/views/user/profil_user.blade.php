@@ -111,7 +111,7 @@
                     </a>
                     </li>
                     <li class="menu-item">
-                    <a href="" class="menu-link">
+                    <a href="/hasil" class="menu-link">
                         <div data-i18n="Connections">Cetak Hasil</div>
                     </a>
                     </li>
@@ -150,13 +150,14 @@
               <div class="row">
                 <div class="col-md-12">
                   <div class="card mb-4">
-                    <h5 class="card-header">Detail Profil {{ auth()->user()->username }}</h5>
+                    <h5 class="card-header">Detail Profil {{ auth()->user()->nama }}</h5>
                     <!-- Account -->
                     <hr class="my-0" />
                     <div class="card-body">
                       <form id="formAccountSettings" method="POST" action="/profile/tambah">
                         @csrf
 
+                        @if(isset($profil))
                         <div class="row">
                           <div class="mb-6 col-md-12">
                             <label for="nama" class="form-label ">Nama</label>
@@ -235,7 +236,11 @@
                             <label for="divisi_id" class="form-label ">Divisi</label>
                             <select class="form-select @error('divisi_id') is-invalid @enderror" name="divisi_id" value="{{ $profil->divisi_id}}">
                                 @foreach ($divisis as $divisi)
+                                @if (old('divisi_id', $profil->divisi_id) == $divisi->id)
+                                <option value="{{ $divisi->id }}" selected>{{ $divisi->nama_divisi }}</option>
+                                @else
                                 <option value="{{ $divisi->id }}">{{ $divisi->nama_divisi }}</option>
+                                @endif
                                 @endforeach
                             </select>
                             @error('divisi_id')
@@ -284,6 +289,134 @@
                 </div>
               </div>
             </div>
+            @endif
+
+            @if(empty($profil))
+            <div class="row">
+                          <div class="mb-6 col-md-12">
+                            <label for="nama" class="form-label ">Nama</label>
+                            <input
+                              class="form-control @error('nama') is-invalid @enderror"
+                              type="text"
+                              id="nama"
+                              name="nama"
+                              placeholder="Nama"
+                              autofocus
+                            />
+                             @error('nama')
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+
+                                </div>
+                            @enderror
+                          </div>
+                          <div class="mb-3 col-md-6 mt-3">
+                            <label for="tanggal_masuk" class="form-label ">Tanggal Masuk</label>
+                            <input type="date" name="tanggal_masuk" class="form-control @error('tanggal_masuk') is-invalid @enderror">
+                            @error('tanggal_masuk')
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
+                            @enderror
+                          </div>
+                          <div class="mb-3 col-md-6 mt-3">
+                            <label for="jenis_kelamin" class="form-label ">Jenis Kelamin</label>
+                            <select id="jenis_kelamin" class="select2 form-select @error('gender') is-invalid @enderror" name="gender" >
+                              <option value="Laki-Laki">Laki-Laki</option>
+                              <option value="Perempuan">Perempuan</option>
+                            </select>
+                            @error('gender')
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
+                            @enderror
+                          </div>
+                          <div class="mb-3 col-md-6">
+                            <label for="tempat_Lahir" class="form-label">Tempat Lahir</label>
+                            <input
+                              type="text"
+                              class="form-control  @error('tempat_lahir') is-invalid @enderror"
+                              id="tempat_Lahir"
+                              name="tempat_lahir"
+                              placeholder="Tempat Lahir"
+                            />
+                            @error('tempat_lahir')
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
+                            @enderror
+                          </div>
+                          <div class="mb-3 col-md-6">
+                            <label for="tanggal_lahir" class="form-label ">Tanggal Lahir</label>
+                            <input type="date" class="form-control @error('tanggal_lahir') is-invalid @enderror" name="tanggal_lahir">
+                                @error('tanggal_lahir')
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
+                            @enderror
+                          </div>
+                          <div class="mb-3 col-md-6">
+                            <label for="alamat" class="form-label ">Alamat</label>
+                            <input type="text" class="form-control @error('alamat') is-invalid @enderror" id="alamat" name="alamat" placeholder="Alamat" />
+                                @error('alamat')
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
+                            @enderror
+                          </div>
+                          <div class="mb-3 col-md-6">
+                            <label for="divisi_id" class="form-label ">Divisi</label>
+                            <select class="form-select @error('divisi_id') is-invalid @enderror" name="divisi_id">
+                                @foreach ($divisis as $divisi)
+                                <option value="{{ $divisi->id }}">{{ $divisi->nama_divisi }}</option>
+                                @endforeach
+                            </select>
+                            @error('divisi_id')
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
+                            @enderror
+                          </div>
+                          <div class="mb-3 col-md-6">
+                            <label class="form-label" for="no_telepon">Nomor Telepon</label>
+                            <div class="input-group input-group-merge">
+                              <input
+                                type="text"
+                                id="no_telepon"
+                                name="no_telp"
+                                class="form-control @error('no_telp') is-invalid @enderror"
+                                placeholder="Nomor Telepon"
+                              />
+                                @error('no_telp')
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
+                            @enderror
+                            </div>
+                          </div>
+                          <div class="">
+                            <label class="form-label" for="user_id"></label>
+                            <div class="input-group input-group-merge">
+                              <input
+                                type="text"
+                                id="user_id"
+                                name="user_id"
+                                class="form-control"
+                                hidden
+                                value="{{ auth()->user()->id }}"
+                              />
+                            </div>
+                        <div class="mt-2">
+                          <button type="submit" class="btn btn-primary me-2">Simpan</button>
+                        </div>
+                      </form>
+                    </div>
+                    <!-- /Account -->
+                  </div>
+                </div>
+              </div>
+            </div>
+            @endif
             <!-- / Content -->
 
             <!-- Footer -->

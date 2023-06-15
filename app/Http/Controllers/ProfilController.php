@@ -19,7 +19,8 @@ class ProfilController extends Controller
         $profil = DB::table('karyawan')
             ->where('user_id', '=', auth()->user()->id)
             ->first();
-        return view('user.profil_user', ['divisis' => DataDivisi::all() , 'profil' => $profil]);
+        // dd($profil);
+        return view('user.profil_user', ['divisis' => DataDivisi::all(), 'profil' => $profil]);
     }
 
     /**
@@ -29,7 +30,6 @@ class ProfilController extends Controller
      */
     public function create()
     {
-
     }
 
     /**
@@ -41,19 +41,19 @@ class ProfilController extends Controller
     public function store(Request $request)
     {
         $profile = Profil::where('user_id', '=', auth()->user()->id)->first();
-        if(!$profile) {
+        if (!$profile) {
             $validateData = $request->validate([
-               'nama' => 'required',
-               'tanggal_masuk' => 'required',
-               'tempat_lahir' => 'required',
-               'tanggal_lahir' => 'required',
-               'gender' => 'required',
-               'divisi_id' => 'required',
-               'no_telp' => 'required',
-               'alamat' => 'required',
-               'user_id' => 'required',
-           ]);
-           Profil::create($validateData);
+                'nama' => 'required',
+                'tanggal_masuk' => 'required',
+                'tempat_lahir' => 'required',
+                'tanggal_lahir' => 'required|',
+                'gender' => 'required',
+                'divisi_id' => 'required',
+                'no_telp' => 'required|numeric',
+                'alamat' => 'required',
+                'user_id' => 'required',
+            ]);
+            Profil::create($validateData);
         } else {
             $validateData = $request->validate([
                 'nama' => 'required',
@@ -62,12 +62,13 @@ class ProfilController extends Controller
                 'tanggal_lahir' => 'required',
                 'gender' => 'required',
                 'divisi_id' => 'required',
-                'no_telp' => 'required',
+                'no_telp' => 'required|numeric',
                 'alamat' => 'required',
                 'user_id' => 'required',
             ]);
             $profile->update($validateData);
         }
+
 
         return redirect()->route('viewprofil')->with('success', 'Profil berhasil ditambahkan!');
     }

@@ -33,7 +33,7 @@
             <!-- Sidebar - Brand -->
             <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/">
                 <div class="sidebar-brand-icon rotate-n-15">
-                    <i class="fas fa-laugh-wink"></i>
+                    <i class="bi bi-building"></i>
                 </div>
                 <div class="sidebar-brand-text mx-3">E-Kinerja</div>
             </a>
@@ -57,7 +57,7 @@
                         <a class="collapse-item" href="/dataadmin">Data Admin</a>
                         <a class="collapse-item" href="/viewajuan">Data Ajuan</a>
                         <a class="collapse-item" href="/viewdivisi">Data divisi</a>
-                        <a class="collapse-item" href="">Data karyawan</a>
+                        <a class="collapse-item" href="/viewkaryawan">Data karyawan</a>
                         @endcan
 
                         @can('hrd')
@@ -65,7 +65,7 @@
                         <a class="collapse-item" href="/hrd/dataadmin">Data Admin</a>
                         <a class="collapse-item" href="/hrd/viewajuan">Data Ajuan</a>
                         <a class="collapse-item" href="/hrd/viewdivisi">Data divisi</a>
-                        <a class="collapse-item" href="">Data karyawan</a>
+                        <a class="collapse-item" href="/hrd/viewkaryawan">Data karyawan</a>
                         @endcan
                     </div>
                 </div>
@@ -82,13 +82,13 @@
                         @can('admin')
                         <a class="collapse-item" href="/viewkriteria">Data kriteria</a>
                         <a class="collapse-item" href="/viewpertanyaan">Data Pertanyaan</a>
-                        <a class="collapse-item" href="">Data Hasil</a>
+                        <a class="collapse-item" href="/viewhasil">Data Hasil</a>
                         @endcan
 
                         @can('hrd')
                         <a class="collapse-item" href="/hrd/viewkriteria">Data kriteria</a>
-                        <a class="collapse-item" href="">Data Pertanyaan</a>
-                        <a class="collapse-item" href="">Data Hasil</a>
+                        <a class="collapse-item" href="/hrd/viewpertanyaan">Data Pertanyaan</a>
+                        <a class="collapse-item" href="/hrd/viewhasil">Data Hasil</a>
                         @endcan
                     </div>
                 </div>
@@ -147,7 +147,7 @@
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <span class="mr-2 d-none d-lg-inline text-gray-600 small">Welcome back,
-                                    {{ auth()->user()->username }}<i class="bi bi-person-fill"></i></span>
+                                    {{ auth()->user()->nama }}<i class="bi bi-person-fill"></i></span>
                             </a>
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">

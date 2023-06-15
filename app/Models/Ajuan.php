@@ -11,11 +11,11 @@ class Ajuan extends Model
     protected $table = "ajuan";
     protected $primaryKey = 'id';
     protected $fillable = [
-        'username',
+        'nama',
         'email',
         'password',
         'role_id',
-        'status_akun',
+        'status',
         'status_ajuan'
     ];
 }

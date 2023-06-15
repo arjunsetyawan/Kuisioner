@@ -31,7 +31,7 @@
                         <thead>
                             <tr>
                                 <th>No</th>
-                                <th>Username</th>
+                                <th>Nama</th>
                                 <th>Email</th>
                                 <th>Role</th>
                                 <th>Status</th>
@@ -45,7 +45,7 @@
                             @foreach ($users as $data)
                                 <tr>
                                     <th>{{ $no++ }}</th>
-                                    <td>{{ $data->username }}</td>
+                                    <td>{{ $data->nama }}</td>
                                     <td>{{ $data->email }}</td>
                                     <td>
                                         @if ($data->role_id == 2)

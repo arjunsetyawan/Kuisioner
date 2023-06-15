@@ -27,7 +27,7 @@
       content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0"
     />
 
-    <title>Profil Karyawan</title>
+    <title>Kuisioner Kinerja</title>
 
     <meta name="description" content="" />
 
@@ -111,7 +111,7 @@
                     </a>
                     </li>
                     <li class="menu-item">
-                    <a href="" class="menu-link">
+                    <a href="/hasil" class="menu-link">
                         <div data-i18n="Connections">Cetak Hasil</div>
                     </a>
                     </li>
@@ -155,7 +155,7 @@
                     <div class="col-6 ms-4 mb-4">
                             <select class="form-select" name="karyawan_id">
                                 @foreach ($users as $data )
-                                <option value="{{ $data->id }}">{{ $data->username }}</option>
+                                <option value="{{ $data->id }}">{{ $data->nama }}</option>
                                 @endforeach
                             </select>
                         </div>

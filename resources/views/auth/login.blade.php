@@ -4,7 +4,7 @@
 <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1  ">
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400&display=swap" rel="stylesheet">
 
     <link rel="stylesheet" href="{!! asset('fonts/icomoon/style.css') !!}">
@@ -42,7 +42,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
             @endif
-            <div class="login-reg-panel">
+            <div class="login-reg-panel ">
                 <div class="login-info-box">
                     <h2>Sudah Punya Akun?</h2>
                     <p>Klik button dibawah ini</p>

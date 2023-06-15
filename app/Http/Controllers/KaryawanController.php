@@ -2,13 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Ajuan;
 use Illuminate\Http\Request;
-use App\Models\User;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\DB;
 
-class RegisterController extends Controller
+class KaryawanController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,7 +14,10 @@ class RegisterController extends Controller
      */
     public function index()
     {
-        return view('auth.login');
+        $karyawan = DB::table('karyawan')
+            ->join('divisi', 'karyawan.divisi_id', '=', 'divisi.id')
+            ->get();
+        return view('admin.datakaryawan.viewkaryawan', ['karyawan' => $karyawan]);
     }
 
     /**
@@ -27,6 +27,7 @@ class RegisterController extends Controller
      */
     public function create()
     {
+        //
     }
 
     /**
@@ -37,18 +38,7 @@ class RegisterController extends Controller
      */
     public function store(Request $request)
     {
-        $validateData = $request->validate([
-            'nama' => 'required|min:5',
-            'email' => 'required|email:dns|unique:ajuan,email',
-            'password' => 'required|min:8|max:255',
-            'role_id' => 'required',
-
-        ]);
-        $validateData['status_akun'] = 'Inactive';
-        $validateData['status_ajuan'] = 'Menunggu Admin';
-        Ajuan::create($validateData);
-        $request->session()->flash('success', 'Ajuan Berhasil, silahkan tunggu konfirmasi dari admin');
-        return view('auth.login');
+        //
     }
 
     /**

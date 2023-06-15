@@ -46,21 +46,22 @@ class DataUserController extends Controller
     {
         // dd($request->all());
         $validateData = $request->validate([
-            'username' => 'required|min:5',
-            'email' => 'required|email:dns',
+            'nama' => 'required|min:5',
+            'email' => 'required|email:dns|unique:users,email',
             'password' => 'required|min:8|max:255',
             'role_id' => 'required',
             'status' => 'required'
         ]);
         $validateData['password'] = Hash::make($validateData['password']);
+
+        $receiver = $validateData['email'];
+        $subject = "Registrasi Akun Kuisioner Kinerja Monster Group";
+        $body = $validateData['email'];
+        $body2 = $request->password;
+
         DataUser::create($validateData);
-        $this->sendEmail(
-            $validateData['email'],
-            "Registrasi Akun Kuisioner Kinerja Monster Group",
-            $validateData['email'],
-            $request->password
-        );
-        return redirect()->route('viewuser')->with('success', 'User baru telah ditambahkan!');
+        $this->sendEmail($receiver, $subject, $body, $body2);
+        return redirect()->route('viewuser')->with('success', 'User baru telah ditambahkan dan telah dikirimkan melalui email!');
     }
 
     /**
@@ -96,7 +97,7 @@ class DataUserController extends Controller
     public function update(Request $request, DataUser $id)
     {
         $validateData = $request->validate([
-            'username' => 'required|min:5',
+            'nama' => 'required|min:5',
             'email' => 'required|email:dns',
             'password' => 'required|min:8|max:255',
             'role_id' => 'required',
@@ -116,7 +117,7 @@ class DataUserController extends Controller
     public function destroy(DataUser $id)
     {
         DataUser::destroy($id->id);
-        return redirect()->route('viewuser')->with('sukses', 'Admin telah dihapus!');
+        return redirect()->route('viewuser')->with('sukses', 'User telah dihapus!');
     }
 
     public function sendEmail($receiver, $subject, $body, $body2)

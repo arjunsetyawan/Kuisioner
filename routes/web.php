@@ -2,9 +2,11 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AjuanController;
+use App\Http\Controllers\HasilController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\ProfilController;
 use App\Http\Controllers\DataUserController;
+use App\Http\Controllers\KaryawanController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DataAdminController;
@@ -36,6 +38,7 @@ Route::post('/logout', [LoginController::class, 'logout']);
 Route::get('/register', [RegisterController::class, 'index'])->middleware('guest');
 Route::post('/register', [RegisterController::class, 'store']);
 
+
 //User -> Profil
 Route::middleware(['auth', 'IsUser'])->group(function () {
 
@@ -48,6 +51,10 @@ Route::middleware(['auth', 'IsUser'])->group(function () {
         Route::get('/kuisioner', [KuisionerController::class, 'index'])->name('viewkuisioner');
         Route::post('/kuisioner/tambah', [KuisionerController::class, 'store']);
     });
+
+    //User -> Hasil
+    Route::get('/hasil', [HasilController::class, 'hasilPenilaian']);
+    Route::get('/cetak', [HasilController::class, 'cetakPenilaian'])->name('cetakkuisioner');
 });
 
 Route::middleware(['auth', 'IsAdmin'])->group(function () {
@@ -94,19 +101,41 @@ Route::middleware(['auth', 'IsAdmin'])->group(function () {
 
     //Admin -> Data Ajuan
     Route::get('/viewajuan', [AjuanController::class, 'index'])->name('viewajuan');
+    Route::get('/dataajuan/edit/{id}', [AjuanController::class, 'edit'])->name('editajuan');
+    Route::post('/dataajuan/update/{id}', [AjuanController::class, 'update'])->name('updateajuan');
+
+
+    //Admin -> Data Hasil
+    Route::get('/viewhasil', [HasilController::class, 'index'])->name('viewhasil');
+
+    //Admin -> Data Karyawan
+    Route::get('/viewkaryawan', [KaryawanController::class, 'index'])->name('viewkaryawan');
 });
 
 Route::middleware(['auth', 'IsHRD'])->group(function () {
 
-    //Admin -> Data User
+    //HRD -> Data User
     Route::get('/hrd/datauser', [DataUserController::class, 'index']);
 
-    //Admin -> Data Admin
+    //HRD -> Data Admin
     Route::get('/hrd/dataadmin', [DataAdminController::class, 'index']);
 
-    //Admin -> Data Divisi
+    //HRD -> Data Divisi
     Route::get('/hrd/viewdivisi', [DataDivisiController::class, 'index']);
 
-    //Admin -> Data Kriteria
+    //HRD -> Data Kriteria
     Route::get('/hrd/viewkriteria', [DataKriteriaController::class, 'index']);
+
+    //HRD -> Data Pertanyaan
+    Route::get('/hrd/viewpertanyaan', [PertanyaanController::class, 'index']);
+
+    //HRD -> Data Ajuan
+    Route::get('/hrd/viewajuan', [AjuanController::class, 'index']);
+
+    //HRD -> Data Hasil
+    Route::get('/hrd/viewhasil', [HasilController::class, 'index']);
+    Route::get('/datahasil/cetak', [HasilController::class, 'cetak'])->name('cetakhasil');
+
+    //HRD -> Data Karyawan
+    Route::get('/hrd/viewkaryawan', [KaryawanController::class, 'index']);
 });

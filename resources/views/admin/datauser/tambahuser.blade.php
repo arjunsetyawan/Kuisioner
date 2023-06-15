@@ -9,11 +9,11 @@
                     <form class="col-lg-8" method="post" action="/datauser/tambah">
                         @csrf
                         <div class="mb-3">
-                            <label for="username"
-                                class="form-label @error('username') is-invalid @enderror">Username</label>
-                            <input type="text" class="form-control" id="username" name="username" required
-                                value="{{ old('username') }}" autofocus>
-                            @error('username')
+                            <label for="nama"
+                                class="form-label @error('nama') is-invalid @enderror">Nama</label>
+                            <input type="text" class="form-control" id="nama" name="nama" required
+                                value="{{ old('nama') }}" autofocus>
+                            @error('nama')
                                 <div class="invalid-feedback">
                                     {{ $message }}
                                 </div>

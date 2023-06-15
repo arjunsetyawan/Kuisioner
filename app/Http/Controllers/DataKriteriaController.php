@@ -16,7 +16,8 @@ class DataKriteriaController extends Controller
     public function index()
     {
         $kriteria = DB::table('kriteria')
-            ->get();
+            // ->get()
+            ->paginate(4);
         return view('admin.datakriteria.viewkriteria', ['kriteria' => $kriteria]);
     }
 

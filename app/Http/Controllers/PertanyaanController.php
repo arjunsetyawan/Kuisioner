@@ -18,7 +18,9 @@ class PertanyaanController extends Controller
     public function index()
     {
         $pertanyaan = DB::table('pertanyaan')
-        ->paginate(5);
+            ->join('periode', 'pertanyaan.periode_id', '=', 'periode.id')
+            ->join('kriteria', 'pertanyaan.kriteria_id', '=', 'kriteria.id_kriteria')
+            ->paginate(5);
         return view('admin.datapertanyaan.viewpertanyaan', ['pertanyaan' => $pertanyaan]);
     }
 
@@ -71,7 +73,7 @@ class PertanyaanController extends Controller
     {
         $data = Pertanyaan::find($id);
         // dd($data);
-        return view('admin.datapertanyaan.updatepertanyaan', ['kriterias' => DataKriteria::all(), 'periodes' => Periode::all() , 'data' => $data]);
+        return view('admin.datapertanyaan.updatepertanyaan', ['kriterias' => DataKriteria::all(), 'periodes' => Periode::all(), 'data' => $data]);
     }
 
     /**

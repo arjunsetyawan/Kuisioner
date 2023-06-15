@@ -24,37 +24,48 @@ class KuisionerController extends Controller
         $pertanyaan = DB::table('pertanyaan')
             ->join('kriteria', 'pertanyaan.kriteria_id', '=', 'kriteria.id_kriteria')
             ->get();
-        $userJoin = User::join('hasil', 'users.id', '=', 'hasil.karyawan_id')->where('hasil.karyawan_id2', Auth::user()->id)->get();
-        $user = User::where('role_id', 2)->get();
-        $filterUser = [];
 
+        //mengambil data user aktif
+        $userActive = User::where('users.id', Auth::user()->id)->join('karyawan', 'users.id', '=', 'karyawan.user_id')
+            ->first();
+
+        //mengambil data pegawai yang sudah mengisi kuisioner
+        $userJoin = User::join('hasil', 'users.id', '=', 'hasil.karyawan_id')->where('hasil.karyawan_id2', Auth::user()->id)->get();
+
+        //mengambil data karyawan yang satu divisi
+        $user = User::where('role_id', 2)->join('karyawan', 'users.id', '=', 'karyawan.user_id')->where('karyawan.divisi_id', $userActive->divisi_id)->get();
+
+
+        //filter data
+        $filterUser = [];
         $idUserJoin = [];
+        // mengambil id data pegawai yang sudah mengisi
         foreach ($userJoin as $item) {
             array_push($idUserJoin, $item->karyawan_id);
         }
+        //menambah id user aktif
         array_push($idUserJoin, Auth::user()->id);
 
+        //mengambil id user yang saatu divisi
         $idUser = [];
         foreach ($user as $item) {
-            array_push($idUser, $item->id);
+            array_push($idUser, $item->user_id);
         }
 
+        //memfilter
         foreach ($idUser as $item) {
             if (!in_array($item, $idUserJoin)) {
                 array_push($filterUser, $item);
             }
         }
-        // dd($filterUser, $idUserJoin);
 
+        //mengambil data user yang sudah difilter
         $users = [];
         foreach ($filterUser as $item) {
             $user = User::where('id', $item)->first();
             array_push($users, $user);
         }
 
-
-        // $userFilter = User::where('id', '!=', $user[0]->id)->where('role_id', 2)->get();
-        // dd($userFilter);
         return view('user.viewkuisioner', ['pertanyaan' => $pertanyaan, 'kriteria' => DataKriteria::all(), 'users' => $users]);
     }
 

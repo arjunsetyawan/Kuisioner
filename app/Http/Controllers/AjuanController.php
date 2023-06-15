@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Ajuan;
+use App\Models\Role;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -60,19 +62,24 @@ class AjuanController extends Controller
      */
     public function edit($id)
     {
-        //
+        $data = Ajuan::find($id);
+        return view('/admin/dataajuan/updateajuan', ['data' => $data, 'roles' => Role::all()]);
     }
 
     /**
-     * Update the specified resource in storage.
+     * Update the specified resource in storage
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Ajuan $id)
     {
-        //
+        $validateData = $request->validate([
+            'status_ajuan' => 'required'
+        ]);
+        $id->update($validateData);
+        return redirect()->route('viewajuan')->with('success', 'Sukses update!');
     }
 
     /**
