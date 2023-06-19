@@ -62,8 +62,6 @@
 
                         @can('hrd')
                         <a class="collapse-item" href="/hrd/datauser">Data User</a>
-                        <a class="collapse-item" href="/hrd/dataadmin">Data Admin</a>
-                        <a class="collapse-item" href="/hrd/viewajuan">Data Ajuan</a>
                         <a class="collapse-item" href="/hrd/viewdivisi">Data divisi</a>
                         <a class="collapse-item" href="/hrd/viewkaryawan">Data karyawan</a>
                         @endcan

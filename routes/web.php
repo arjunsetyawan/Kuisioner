@@ -117,9 +117,6 @@ Route::middleware(['auth', 'IsHRD'])->group(function () {
     //HRD -> Data User
     Route::get('/hrd/datauser', [DataUserController::class, 'index']);
 
-    //HRD -> Data Admin
-    Route::get('/hrd/dataadmin', [DataAdminController::class, 'index']);
-
     //HRD -> Data Divisi
     Route::get('/hrd/viewdivisi', [DataDivisiController::class, 'index']);
 
@@ -128,9 +125,6 @@ Route::middleware(['auth', 'IsHRD'])->group(function () {
 
     //HRD -> Data Pertanyaan
     Route::get('/hrd/viewpertanyaan', [PertanyaanController::class, 'index']);
-
-    //HRD -> Data Ajuan
-    Route::get('/hrd/viewajuan', [AjuanController::class, 'index']);
 
     //HRD -> Data Hasil
     Route::get('/hrd/viewhasil', [HasilController::class, 'index']);

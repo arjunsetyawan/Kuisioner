@@ -17,7 +17,7 @@ use Carbon\Carbon;
     <div class="form-group">
         <h3 align="center"><b>Laporan Hasil Penilaian</b></h3>
         <p style="margin-left:40px; margin-top:40px;"> <b>Nama : {{ auth()->user()->nama }}</b> </p>
-        <p style="margin-left:40px;"> <b>Periode : {{ $hasil->bulan}}</b> </p>
+        <p style="margin-left:40px;"> <b>Periode : {{ $hasil->  bulan}}</b> </p>
         <p style="margin-left:40px"> <b>Tanggal Pengisian : {{ Carbon::parse($hasil->tanggal_pengisian)->format('d-m-Y') }}</b></p>
         <table class="static" align="center" rules="all" border="1px" style="width:95%;">
             <thead>
