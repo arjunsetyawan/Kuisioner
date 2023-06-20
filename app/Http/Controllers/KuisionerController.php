@@ -12,6 +12,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
+
 class KuisionerController extends Controller
 {
     /**
@@ -21,9 +22,16 @@ class KuisionerController extends Controller
      */
     public function index()
     {
+        $bulansekarang = Carbon::now()->month;
+        $periodeId = DB::table('periode')
+            ->where('id_periode', $bulansekarang)
+            ->value('id_periode');
         $pertanyaan = DB::table('pertanyaan')
             ->join('kriteria', 'pertanyaan.kriteria_id', '=', 'kriteria.id_kriteria')
+            ->join('periode', 'pertanyaan.periode_id', '=', 'periode.id_periode')
+            ->where('id_periode', $periodeId)
             ->get();
+        // dd($pertanyaan);
 
         //mengambil data user aktif
         $userActive = User::where('users.id', Auth::user()->id)->join('karyawan', 'users.id', '=', 'karyawan.user_id')
@@ -156,6 +164,7 @@ class KuisionerController extends Controller
             'periode_id' => $request->periode,
         ];
         Kuisioner::create($data);
+        return redirect()->route('viewkuisioner')->with('success', 'Kuisioner berhasil diisi!');
         // dd($attitude, $kedisiplinan, $inisiatif, $leadership, $kerjasama, $kehadiran, $tanggungjawab, $komunikasi);
         // dd($request->all()); //cek data
 

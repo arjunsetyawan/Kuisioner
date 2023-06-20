@@ -119,7 +119,12 @@
                         @if (session()->has('warning'))
                         <div class="alert alert-danger" role="alert">
                             {{ session('warning') }}
+                        </div>
+                        @endif
 
+                        @if(session()->has('success'))
+                        <div class="alert alert-primary" role="alert">
+                            {{ session('success') }}
                         </div>
                         @endif
 

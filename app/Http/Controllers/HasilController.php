@@ -16,7 +16,7 @@ class HasilController extends Controller
     public function index()
     {
         $hasil = DB::table('hasil')
-            ->join('periode', 'hasil.periode_id', '=', 'periode.id')
+            ->join('periode', 'hasil.periode_id', '=', 'periode.id_periode')
             ->join('users', 'hasil.karyawan_id', '=', 'users.id')
             ->leftJoin('users as u2', 'hasil.karyawan_id2', '=', 'u2.id')
             ->select('hasil.*', 'users.nama as nama_karyawan', 'u2.nama as nama_karyawan2', 'periode.bulan')
@@ -28,7 +28,7 @@ class HasilController extends Controller
     public function cetak()
     {
         $cetak = DB::table('hasil')
-            ->join('periode', 'hasil.periode_id', '=', 'periode.id')
+            ->join('periode', 'hasil.periode_id', '=', 'periode.id_periode')
             ->join('users', 'hasil.karyawan_id', '=', 'users.id')
             ->get();
         return view('admin.datahasil.cetakhasil', ['cetak' => $cetak]);
@@ -37,16 +37,17 @@ class HasilController extends Controller
     public function hasilPenilaian()
     {
         $hasil = DB::table('hasil')
-            ->where('karyawan_id2', '=', auth()->user()->id)
+            ->where('karyawan_id', '=', auth()->user()->id)
             ->first();
+        // dd($hasil);
         return view('user.datahasil.hasilkuisioner', ['hasil' => $hasil]);
     }
 
     public function cetakPenilaian()
     {
         $hasil = DB::table('hasil')
-            ->where('karyawan_id2', '=', auth()->user()->id)
-            ->join('periode', 'hasil.periode_id', '=', 'periode.id')
+            ->where('karyawan_id', '=', auth()->user()->id)
+            ->join('periode', 'hasil.periode_id', '=', 'periode.id_periode')
             ->first();
         return view('user.datahasil.cetakkuisioner', ['hasil' => $hasil]);
     }

@@ -18,9 +18,10 @@ class PertanyaanController extends Controller
     public function index()
     {
         $pertanyaan = DB::table('pertanyaan')
-            ->join('periode', 'pertanyaan.periode_id', '=', 'periode.id')
+            ->join('periode', 'pertanyaan.periode_id', '=', 'periode.id_periode')
             ->join('kriteria', 'pertanyaan.kriteria_id', '=', 'kriteria.id_kriteria')
-            ->paginate(5);
+            ->paginate(6);
+        // dd($pertanyaan);
         return view('admin.datapertanyaan.viewpertanyaan', ['pertanyaan' => $pertanyaan]);
     }
 
@@ -42,12 +43,14 @@ class PertanyaanController extends Controller
      */
     public function store(Request $request)
     {
-
+        // dd($request->all());
         $validateData = $request->validate([
             'kriteria_id' => 'required',
             'nama_pertanyaan' => 'required',
             'periode_id' => 'required'
         ]);
+
+
         Pertanyaan::create($validateData);
         return redirect()->route('viewpertanyaan')->with('success', 'Pertanyaan baru telah ditambahkan!');
     }
@@ -71,6 +74,7 @@ class PertanyaanController extends Controller
      */
     public function edit($id)
     {
+        // dd($id);
         $data = Pertanyaan::find($id);
         // dd($data);
         return view('admin.datapertanyaan.updatepertanyaan', ['kriterias' => DataKriteria::all(), 'periodes' => Periode::all(), 'data' => $data]);
