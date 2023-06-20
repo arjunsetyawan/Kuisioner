@@ -22,15 +22,17 @@ class DashboardController extends Controller
                 $divisi = DB::table('divisi')->count();
                 $kriteria = DB::table('kriteria')->count();
                 $pertanyaan = DB::table('pertanyaan')->count();
-                return view('admin.index', ['users' => $users, 'divisi' => $divisi, 'kriteria' => $kriteria, 'pertanyaan' => $pertanyaan,]);
+                $ajuan = DB::table('ajuan')->count();
+                return view('admin.index', ['users' => $users, 'divisi' => $divisi, 'kriteria' => $kriteria, 'pertanyaan' => $pertanyaan, 'ajuan' => $ajuan]);
             } elseif (Auth::user()->role_id == 3 && Auth::user()->status == "Active") {
                 $users = DB::table('users')->count();
                 $divisi = DB::table('divisi')->count();
                 $kriteria = DB::table('kriteria')->count();
                 $pertanyaan = DB::table('pertanyaan')->count();
                 $hasil = DB::table('hasil')->count();
-                $selisih = $users - $hasil;
-                return view('admin.index', ['users' => $users, 'divisi' => $divisi, 'kriteria' => $kriteria, 'pertanyaan' => $pertanyaan, 'hasil' => $hasil, 'selisih' => $selisih]);
+                $karyawan = DB::table('users')->where('role_id', 2)->count();
+                $selisih = $karyawan - $hasil;
+                return view('admin.index', ['users' => $users, 'divisi' => $divisi, 'kriteria' => $kriteria, 'pertanyaan' => $pertanyaan, 'hasil' => $hasil, 'selisih' => $selisih, 'karyawan' => $karyawan]);
             } elseif (Auth::user()->role_id == 2 && Auth::user()->status == "Active") {
                 $data = DB::table('kriteria')
                     ->get();

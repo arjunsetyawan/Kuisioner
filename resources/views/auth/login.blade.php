@@ -83,8 +83,8 @@
                     <div class="register-show">
                         <h3 class="mb-4 ">AJUAN</h3>
                         <div class="form-group ">
-                            <input type="text" class="form-control @error('username') is-invalid @enderror" id="username" name="username" placeholder="Username" value="{{ old('username') }}">
-                            @error('username')
+                            <input type="text" class="form-control @error('nama') is-invalid @enderror" id="nama" name="nama" placeholder="Nama" value="{{ old('nama') }}">
+                            @error('nama')
                             <div class="invalid-feedback">
                                 {{ $message }}
                             </div>
@@ -106,7 +106,6 @@
                             </div>
                             @enderror
                         </div>
-
                         <input type="hidden" class="form-control" id="role_id" value="2" name="role_id">
                         <input type="submit" class="btn btn-block btn-primary">
                     </div>

@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Hasil;
-use App\Models\Pertanyaan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -19,8 +18,10 @@ class HasilController extends Controller
         $hasil = DB::table('hasil')
             ->join('periode', 'hasil.periode_id', '=', 'periode.id')
             ->join('users', 'hasil.karyawan_id', '=', 'users.id')
-            ->join('karyawan', 'hasil.karyawan_id', '=', 'karyawan.user_id')
+            ->leftJoin('users as u2', 'hasil.karyawan_id2', '=', 'u2.id')
+            ->select('hasil.*', 'users.nama as nama_karyawan', 'u2.nama as nama_karyawan2', 'periode.bulan')
             ->get();
+        // dd($hasil);
         return view('admin.datahasil.viewhasil', ['hasil' => $hasil]);
     }
 
