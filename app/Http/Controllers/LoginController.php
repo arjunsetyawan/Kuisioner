@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Rules\Captcha;
+
 
 class LoginController extends Controller
 {
@@ -19,18 +21,31 @@ class LoginController extends Controller
 
     public function auth(Request $request)
     {
+        $input = $request->all();
         $credentials = $request->validate([
             'email' => 'required|email:dns',
             'password' => 'required',
-             
+
         ]);
 
-        if (Auth::attempt($credentials)) {
+        $recaptcha_secret = "6Le1A8ImAAAAAEJ6__CVfPZC_-6G8m_2My8aYiKL";
+        $response = file_get_contents("https://www.google.com/recaptcha/api/siteverify?secret=" . $recaptcha_secret . "&response=" . $input['g-recaptcha-response']);
+        $response = json_decode($response, true);
+        //
+        if ($response["success"] === true) {
+            Auth::attempt($credentials);
             $request->session()->regenerate();
             return redirect()->intended('/');
+        } else {
+            return back()->with('loginError', 'Mohon untuk isi validasi!');
         }
         return back()->with('loginError', 'Login failed!');
     }
+    // if (Auth::attempt($credentials)) {
+    //     $request->session()->regenerate();
+    //     return redirect()->intended('/');
+    // }
+
 
     public function logout()
     {

@@ -19,6 +19,7 @@
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 
     <!-- Style -->
     <link rel="stylesheet" href="{!! asset('css/login/style.css') !!}">
@@ -62,7 +63,7 @@
                     <div class="white-panel">
                         <div class="login-show">
                             <h3 class="mb-4 ">LOGIN</h3>
-                            <div class="form-group first">
+                            <div class="form-group">
                                 <input type="email" class="form-control @error('email') is-invalid @enderror" id="email" name="email" autofocus required placeholder="Email" value="{{ old('email') }}">
                                 @error('email')
                                 <div class="invalid-feedback">
@@ -71,8 +72,19 @@
                                 @enderror
                             </div>
 
-                            <div class="form-group last mb-4">
+                            <div class="form-group mb-4">
                                 <input type="password" class="form-control" id="password" name="password" required placeholder="Password">
+                            </div>
+
+                            <div class="form-group row">
+                                <div class="col-md-12 offset-md-0">
+                                    <div class="g-recaptcha" style="align-items : center;" data-sitekey="6Le1A8ImAAAAAKpI8OIssu6h_3vTDl2cc43Fs0eZ"></div>
+                                    @if($errors->has('g-recaptcha-response'))
+                                    <span class="invalid-feedback" style="display:block">
+                                        <strong>{{$errors->first('g-recaptcha-response')}}</strong>
+                                    </span>
+                                    @endif
+                                </div>
                             </div>
 
                             <input type="submit" value="LOGIN" class="btn btn-block btn-primary">

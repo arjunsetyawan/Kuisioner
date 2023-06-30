@@ -142,59 +142,59 @@
                                                 <tr>
                                                     <td>1.</td>
                                                     <td>Atitude</td>
-                                                    <td>{{ number_format($hasil->attitude * 100/12 ) }}%</td>
+                                                    <td>{{ number_format($hasil->averageAttitude * 100/12 ) }}%</td>
                                                     <td>
-                                                        @if ($hasil->attitude <= 3) Anda memiliki attitude yang kurang aik @elseif($hasil->attitude <= 6) Anda memiliki attitude yang cukup baik @elseif($hasil->attitude <= 9) Anda memiliki attitude yang baik @elseif($hasil->attitude <= 12) Anda memiliki attitude yang sangat baik @endif </td>
-                                                    <td rowspan="8">{{ $hasil->value_essay }}</td>
+                                                        @if ($hasil->averageAttitude <= 3) Anda memiliki attitude yang kurang aik @elseif($hasil->averageAttitude <= 6) Anda memiliki attitude yang cukup baik @elseif($hasil->averageAttitude <= 9) Anda memiliki attitude yang baik @elseif($hasil->averageAttitude <= 12) Anda memiliki attitude yang sangat baik @endif </td>
+                                                    <td rowspan="8">{{ $saran->value_essay }}</td>
                                                 </tr>
                                                 <tr>
                                                     <td>2.</td>
                                                     <td>Kedisiplinan</td>
-                                                    <td>{{ number_format($hasil->kedisiplinan * 100/12) }}%</td>
+                                                    <td>{{ number_format($hasil->averageKedisplinan * 100/12) }}%</td>
                                                     <td>
-                                                        @if ($hasil->kedisiplinan <= 3) Anda memiliki kedisiplinan yang kurang baik @elseif($hasil->kedisiplinan <= 6) Anda memiliki kedisiplinan yang cukup baik @elseif($hasil->kedisiplinan <= 9) Anda memiliki kedisiplinan yang baik @elseif($hasil->kedisiplinan <= 12) Anda memiliki kedisiplinan yang sangat baik @endif </td>
+                                                        @if ($hasil->averageKedisplinan <= 3) Anda memiliki kedisiplinan yang kurang baik @elseif($hasil->averageKedisplinan <= 6) Anda memiliki kedisiplinan yang cukup baik @elseif($hasil->averageKedisplinan <= 9) Anda memiliki kedisiplinan yang baik @elseif($hasil->averageKedisplinan <= 12) Anda memiliki kedisiplinan yang sangat baik @endif </td>
                                                 </tr>
                                                 <tr>
                                                     <td>3.</td>
                                                     <td>Inisiatif</td>
-                                                    <td>{{ number_format($hasil->inisiatif * 100/12) }}%</td>
+                                                    <td>{{ number_format($hasil->averageInisiatif * 100/12) }}%</td>
                                                     <td>
-                                                        @if ($hasil->inisiatif <= 3) Anda memiliki inisiatif yang kurang baik @elseif($hasil->inisiatif <= 6) Anda memiliki inisiatif yang cukup baik @elseif($hasil->inisiatif <= 9) Anda memiliki inisiatif yang baik @elseif($hasil->inisiatif <= 12) Anda memiliki inisiatif yang sangat baik @endif </td>
+                                                        @if ($hasil->averageInisiatif <= 3) Anda memiliki inisiatif yang kurang baik @elseif($hasil->averageInisiatif <= 6) Anda memiliki inisiatif yang cukup baik @elseif($hasil->averageInisiatif <= 9) Anda memiliki inisiatif yang baik @elseif($hasil->averageInisiatif <= 12) Anda memiliki inisiatif yang sangat baik @endif </td>
                                                 </tr>
                                                 <tr>
                                                     <td>4.</td>
                                                     <td>Leadership</td>
-                                                    <td>{{ number_format($hasil->leadership *100/12) }}%</td>
+                                                    <td>{{ number_format($hasil->averageLeadership *100/12) }}%</td>
                                                     <td>
-                                                        @if ($hasil->leadership <= 3) Anda memiliki leadership yang kurang baik @elseif($hasil->leadership <= 6) Anda memiliki leadership yang cukup baik @elseif($hasil->leadership <= 9) Anda memiliki leadership yang baik @elseif($hasil->leadership <= 12) Anda memiliki leadership yang sangat baik @endif </td>
+                                                        @if ($hasil->averageLeadership <= 3) Anda memiliki leadership yang kurang baik @elseif($hasil->averageLeadership <= 6) Anda memiliki leadership yang cukup baik @elseif($hasil->averageLeadership <= 9) Anda memiliki leadership yang baik @elseif($hasil->averageLeadership <= 12) Anda memiliki leadership yang sangat baik @endif </td>
                                                 </tr>
                                                 <tr>
                                                     <td>5.</td>
                                                     <td>Kerjasama</td>
-                                                    <td>{{ number_format($hasil->kerjasama *100/12) }}%</td>
+                                                    <td>{{ number_format($hasil->averageKerjasama *100/12) }}%</td>
                                                     <td>
-                                                        @if ($hasil->kerjasama <= 3) Anda memiliki kerjasama yang kurang baik @elseif($hasil->kerjasama <= 6) Anda memiliki kerjasama yang cukup baik @elseif($hasil->kerjasama <= 9) Anda memiliki kerjasama yang baik @elseif($hasil->kerjasama <= 12) Anda memiliki kerjasama yang sangat baik @endif </td>
+                                                        @if ($hasil->averageKerjasama <= 3) Anda memiliki kerjasama yang kurang baik @elseif($hasil->averageKerjasama <= 6) Anda memiliki kerjasama yang cukup baik @elseif($hasil->averageKerjasama <= 9) Anda memiliki kerjasama yang baik @elseif($hasil->averageKerjasama <= 12) Anda memiliki kerjasama yang sangat baik @endif </td>
                                                 </tr>
                                                 <tr>
                                                     <td>6.</td>
                                                     <td>Kehadiran</td>
-                                                    <td>{{ number_format($hasil->kehadiran *100/12) }}%</td>
+                                                    <td>{{ number_format($hasil->averageKehadiran *100/12) }}%</td>
                                                     <td>
-                                                        @if ($hasil->kehadiran <= 3) Anda memiliki kehadiran yang kurang baik @elseif($hasil->kehadiran <= 6) Anda memiliki kehadiran yang cukup baik @elseif($hasil->kehadiran <= 9) Anda memiliki kehadiran yang baik @elseif($hasil->kehadiran <= 12) Anda memiliki kehadiran yang sangat baik @endif </td>
+                                                        @if ($hasil->averageKehadiran <= 3) Anda memiliki kehadiran yang kurang baik @elseif($hasil->averageKehadiran <= 6) Anda memiliki kehadiran yang cukup baik @elseif($hasil->averageKehadiran <= 9) Anda memiliki kehadiran yang baik @elseif($hasil->averageKehadiran <= 12) Anda memiliki kehadiran yang sangat baik @endif </td>
                                                 </tr>
                                                 <tr>
                                                     <td>7.</td>
                                                     <td>Tanggung Jawab</td>
-                                                    <td>{{ number_format($hasil->tanggungjawab *100/12) }}%</td>
+                                                    <td>{{ number_format($hasil->averageTanggungjawab *100/12) }}%</td>
                                                     <td>
-                                                        @if ($hasil->tanggungjawab <= 3) Anda memiliki tanggung jawab yang kurang baik @elseif($hasil->tanggungjawab <= 6) Anda memiliki tanggung jawab yang cukup baik @elseif($hasil->tanggungjawab <= 9) Anda memiliki tanggung jawab yang baik @elseif($hasil->tanggungjawab <= 12) Anda memiliki tanggung jawab yang sangat baik @endif </td>
+                                                        @if ($hasil->averageTanggungjawab <= 3) Anda memiliki tanggung jawab yang kurang baik @elseif($hasil->averageTanggungjawab <= 6) Anda memiliki tanggung jawab yang cukup baik @elseif($hasil->averageTanggungjawab <= 9) Anda memiliki tanggung jawab yang baik @elseif($hasil->averageTanggungjawab <= 12) Anda memiliki tanggung jawab yang sangat baik @endif </td>
                                                 </tr>
                                                 <tr>
                                                     <td>8.</td>
                                                     <td>Komunikasi</td>
-                                                    <td>{{ number_format($hasil->komunikasi *100/12) }}%</td>
+                                                    <td>{{ number_format($hasil->averageKomunikasi *100/12) }}%</td>
                                                     <td>
-                                                        @if ($hasil->komunikasi <= 3) Anda memiliki komunikasi yang kurang baik @elseif($hasil->komunikasi <= 6) Anda memiliki komunikasi yang cukup baik @elseif($hasil->komunikasi <= 9) Anda memiliki komunikasi yang baik @elseif($hasil->komunikasi <= 12) Anda memiliki komunikasi yang sangat baik @endif </td>
+                                                        @if ($hasil->averageKomunikasi <= 3) Anda memiliki komunikasi yang kurang baik @elseif($hasil->averageKomunikasi <= 6) Anda memiliki komunikasi yang cukup baik @elseif($hasil->averageKomunikasi <= 9) Anda memiliki komunikasi yang baik @elseif($hasil->averageKomunikasi <= 12) Anda memiliki komunikasi yang sangat baik @endif </td>
                                                 </tr>
                                             </tbody>
                                         </table>
