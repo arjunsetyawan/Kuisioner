@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use Carbon\Carbon;
 use App\Models\Hasil;
+use App\Models\Karyawan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 
 class HasilController extends Controller
 {
@@ -56,6 +58,15 @@ class HasilController extends Controller
                      AVG(komunikasi) as averageKomunikasi')
             ->where('karyawan_id', auth()->user()->id)
             ->first();
+
+        $pengisi = DB::table('hasil')
+            ->where('karyawan_id', auth()->user()->id)
+            ->count();
+        // dd($pengisi);
+
+        $users = Auth::user();
+        $karyawan = Karyawan::where('divisi_id', $users->karyawan2->divisi_id)->count();
+        // dd($pengisi, $karyawan);
 
         $saran = DB::table('hasil')
             ->where('karyawan_id', auth()->user()->id)

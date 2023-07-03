@@ -38,11 +38,14 @@ class DataDivisiController extends Controller
      */
     public function store(Request $request)
     {
+        // dd($request->all());
         $validateData = $request->validate([
-            'nama_divisi' => 'required'
+            'nama_divisi' => 'required',
+            'kode_divisi' => 'required'
         ]);
+        // dd($validateData);
         DataDivisi::create($validateData);
-        return redirect()->route('viewdivisi')->with('success', 'Divisi baru telah ditambahkan!');
+        return redirect()->route('viewdivisi')->with('success',  'Divisi baru telah ditambahkan!');
     }
 
 
@@ -80,7 +83,8 @@ class DataDivisiController extends Controller
     public function update(Request $request, DataDivisi $id)
     {
         $validateData = $request->validate([
-            'nama_divisi' => 'required'
+            'nama_divisi' => 'required',
+            'kode_divisi' => 'required'
         ]);
         // dd($id);
         $id->update($validateData);
@@ -97,6 +101,6 @@ class DataDivisiController extends Controller
     public function destroy(DataDivisi $id)
     {
         DataDivisi::destroy($id->id);
-        return redirect()->route('viewdivisi')->with('sukses', 'Admin telah dihapus!');
+        return redirect()->route('viewdivisi')->with('sukses', 'Divisi telah dihapus!');
     }
 }

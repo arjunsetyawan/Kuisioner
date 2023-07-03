@@ -18,6 +18,17 @@
                                 </div>
                             @enderror
                         </div>
+
+                        <div class="mb-3">
+                            <label for="kode_divisi" class="form-label @error('kode_divisi') is-invalid @enderror">Kode Divisi</label>
+                            <input type="text" class="form-control" id="kode_divisi" name="kode_divisi" required
+                                value="{{ old('kode_divisi', $data->kode_divisi) }}" autofocus>
+                            @error(' kode_divisi')
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
+                            @enderror
+                        </div>
                         <button type="submit" class="btn btn-primary">Submit</button>
                     </form>
                 </div>

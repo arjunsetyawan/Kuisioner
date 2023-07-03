@@ -30,6 +30,7 @@
                             <tr>
                                 <th style="width: 5%">No</th>
                                 <th>Divisi</th>
+                                <th>Kode Divisi</th>
                                 @can('admin')
                                     <th style="width :10%">Action</th>
                                 @endcan
@@ -41,6 +42,7 @@
                                 <tr>
                                     <th>{{ $no++ }}</th>
                                     <td>{{ $data->nama_divisi }}</td>
+                                    <td>{{ $data->kode_divisi }}</td>
                                     @can('admin')
                                         <td>
                                             <a href="/datadivisi/edit/{{ $data->id }}" class="btn btn-primary"><i

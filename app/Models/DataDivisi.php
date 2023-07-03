@@ -11,6 +11,7 @@ class DataDivisi extends Model
     protected $table = 'divisi';
     protected $primaryKey = 'id';
     protected $fillable = [
-        'nama_divisi'
+        'nama_divisi',
+        'kode_divisi'
     ];
 }

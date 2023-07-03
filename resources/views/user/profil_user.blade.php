@@ -197,9 +197,9 @@
                                                     <select class="form-select @error('divisi_id') is-invalid @enderror" name="divisi_id" value="{{ $profil->divisi_id}}">
                                                         @foreach ($divisis as $divisi)
                                                         @if (old('divisi_id', $profil->divisi_id) == $divisi->id)
-                                                        <option value="{{ $divisi->id }}" selected>{{ $divisi->nama_divisi }}</option>
+                                                        <option value="{{ $divisi->id }}" selected>{{ $divisi->kode_divisi }}</option>
                                                         @else
-                                                        <option value="{{ $divisi->id }}">{{ $divisi->nama_divisi }}</option>
+                                                        <option value="{{ $divisi->id }}">{{ $divisi->kode_divisi }}</option>
                                                         @endif
                                                         @endforeach
                                                     </select>
