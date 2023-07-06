@@ -32,14 +32,16 @@ class LoginController extends Controller
         $response = file_get_contents("https://www.google.com/recaptcha/api/siteverify?secret=" . $recaptcha_secret . "&response=" . $input['g-recaptcha-response']);
         $response = json_decode($response, true);
         //
+
         if ($response["success"] === true) {
-            Auth::attempt($credentials);
-            $request->session()->regenerate();
-            return redirect()->intended('/');
+            if (Auth::attempt($credentials)) {
+                $request->session()->regenerate();
+                return redirect()->intended('/');
+            }
         } else {
-            return back()->with('loginError', 'Mohon untuk isi validasi!');
+            return back()->with('loginError', 'Mohon Untuk isi validasi!');
         }
-        return back()->with('loginError', 'Login failed!');
+        return back()->with('loginError', 'Email atau password salah!');
     }
     // if (Auth::attempt($credentials)) {
     //     $request->session()->regenerate();

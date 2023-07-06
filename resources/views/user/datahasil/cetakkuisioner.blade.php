@@ -16,7 +16,7 @@ use Carbon\Carbon;
         <h3 align="center"><b>Laporan Hasil Penilaian</b></h3>
         <p style="margin-left:10px; margin-top:40px;"> <b>Nama : {{ auth()->user()->nama }}</b> </p>
         <p style="margin-left:10px;"> <b>Periode : {{ $hasil1->  bulan}}</b> </p>
-        <p style="margin-left:10px"> <b>Tanggal Pengisian : {{ Carbon::parse($hasil1->tanggal_pengisian)->format('d-m-Y') }}</b></p>
+        <p style="margin-left:10px"> <b>Tanggal : {{ Carbon::parse($hasil1->tanggal_pengisian)->format('d-m-Y') }}</b></p>
         <table class="static" align="center" rules="all" border="1px" style="width:100%;">
             <thead>
                 <tr>
@@ -24,7 +24,9 @@ use Carbon\Carbon;
                     <!-- <th rowspan="2" style="width: 15%" class="text-center">Kriteria</th> -->
                     <th rowspan="2" style="width: 15%" class="text-center">Kriteria</th>
                     <th colspan="2" class="text-center" class="text-center">Penilaian</th>
-                    <th rowspan="2" class="text-center" style="width:40%">Saran</th>
+                    @if ($saran->count()>1)
+                    <th rowspan="2" colspan="{{$saran->count() }}" class="text-center" style="width:40%">Saran</th>
+                    @endif
                 </tr>
                 <tr>
                     <th class="text-center" style="width: 5%">Hasil</th>
@@ -38,7 +40,9 @@ use Carbon\Carbon;
                     <td>{{ number_format($hasil->averageAttitude * 100/12 ) }}%</td>
                     <td>
                         @if ($hasil->averageAttitude <= 3) Anda memiliki attitude yang kurang aik @elseif($hasil->averageAttitude <= 6) Anda memiliki attitude yang cukup baik @elseif($hasil->averageAttitude <= 9) Anda memiliki attitude yang baik @elseif($hasil->averageAttitude <= 12) Anda memiliki attitude yang sangat baik @endif </td>
-                    <td rowspan="8">{{ $saran->value_essay }}</td>
+                                        @foreach ($saran as $data )
+                    <td rowspan="8">{{ $data->value_essay }}</td>
+                    @endforeach
                 </tr>
                 <tr>
                     <td>2.</td>

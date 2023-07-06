@@ -14,4 +14,9 @@ class Hasil extends Model
     {
         return $this->belongsTo(User::class, 'karyawan_id2');
     }
+
+    public function karyawan()
+    {
+        return $this->belongsTo(Karyawan::class);
+    }
 }

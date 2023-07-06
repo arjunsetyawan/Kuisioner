@@ -31,18 +31,21 @@ class KuisionerController extends Controller
             ->join('periode', 'pertanyaan.periode_id', '=', 'periode.id_periode')
             ->where('id_periode', $periodeId)
             ->get();
-        // dd($pertanyaan);
 
         //mengambil data user aktif
         $userActive = User::where('users.id', Auth::user()->id)->join('karyawan', 'users.id', '=', 'karyawan.user_id')
             ->first();
 
-        //mengambil data pegawai yang sudah mengisi kuisioner
-        $userJoin = User::join('hasil', 'users.id', '=', 'hasil.karyawan_id')->where('hasil.karyawan_id2', Auth::user()->id)->get();
+
+        //mengambil data pegawai yang sudah diisi kuisioner
+        $userJoin = User::join('hasil', 'users.id', '=', 'hasil.karyawan_id2')->where('hasil.karyawan_id2', Auth::user()->id)->where('hasil.periode_id',  $periodeId)->get();
+        // dd($userJoin);
+        // dd($userJoin[0]->periode_id != $periodeId);
 
         //mengambil data karyawan yang satu divisi
-        $user = User::where('role_id', 2)->join('karyawan', 'users.id', '=', 'karyawan.user_id')->where('karyawan.divisi_id', $userActive->divisi_id)->get();
+        $user = User::where('users.role_id', 2)->join('karyawan', 'users.id', '=', 'karyawan.user_id')->where('karyawan.divisi_id', $userActive->divisi_id)->get();
 
+        // dd($userJoin, $user, $periodeId);
 
         //filter data
         $filterUser = [];

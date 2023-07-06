@@ -104,10 +104,6 @@ Route::middleware(['auth', 'IsAdmin'])->group(function () {
     Route::get('/dataajuan/edit/{id}', [AjuanController::class, 'edit'])->name('editajuan');
     Route::post('/dataajuan/update/{id}', [AjuanController::class, 'update'])->name('updateajuan');
 
-
-    //Admin -> Data Hasil
-    Route::get('/viewhasil', [HasilController::class, 'index'])->name('viewhasil');
-
     //Admin -> Data Karyawan
     Route::get('/viewkaryawan', [KaryawanController::class, 'index'])->name('viewkaryawan');
 });
@@ -128,6 +124,7 @@ Route::middleware(['auth', 'IsHRD'])->group(function () {
 
     //HRD -> Data Hasil
     Route::get('/hrd/viewhasil', [HasilController::class, 'index']);
+    Route::get('/hrd/detailhasil/{id}', [HasilController::class, 'detail']);
     Route::get('/datahasil/cetak', [HasilController::class, 'cetak'])->name('cetakhasil');
 
     //HRD -> Data Karyawan

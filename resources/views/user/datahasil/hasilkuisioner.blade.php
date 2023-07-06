@@ -1,5 +1,21 @@
 <!DOCTYPE html>
 
+<style>
+    .container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .left {
+        order: 1;
+    }
+
+    .right {
+        order: 2;
+    }
+</style>
+
 <html lang="en" class="light-style layout-menu-fixed" dir="ltr" data-theme="theme-default" data-assets-path="../assets/" data-template="vertical-menu-template-free">
 
 <head>
@@ -123,7 +139,14 @@
                                     <!-- Account -->
                                     <hr class="my-0" />
                                     <div class="card-body">
-                                        <a href="/cetak" target="_blank" class="print-hidden mb-4 btn btn-primary me-0"><i class="bi bi-printer-fill mr-2"></i>Cetak Data Hasil</a>
+                                        <div class="container">
+                                            <div class="left">
+                                                <a href="/cetak" target="_blank" class="print-hidden mb-4 btn btn-primary"><i class="bi bi-printer-fill"></i>Cetak Data Hasil</a>
+                                            </div>
+                                            <div class="right">
+                                                <p>Telah diisi {{$pengisi}} dari {{$karyawan}}</p>
+                                            </div>
+                                        </div>
                                         <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                             <thead>
                                                 <tr>
@@ -131,7 +154,9 @@
                                                     <!-- <th rowspan="2" style="width: 15%" class="text-center">Kriteria</th> -->
                                                     <th rowspan="2" style="width: 25%" class="text-center">Kriteria</th>
                                                     <th colspan="2" class="text-center" class="text-center">Penilaian</th>
-                                                    <th rowspan="2" class="text-center" style="width:40%">Saran</th>
+                                                    @if ($saran->count()>1)
+                                                    <th rowspan="2" colspan="{{$saran->count() }}" class="text-center" style="width:40%">Saran</th>
+                                                    @endif
                                                 </tr>
                                                 <tr>
                                                     <th class="text-center">Hasil</th>
@@ -145,7 +170,9 @@
                                                     <td>{{ number_format($hasil->averageAttitude * 100/12 ) }}%</td>
                                                     <td>
                                                         @if ($hasil->averageAttitude <= 3) Anda memiliki attitude yang kurang aik @elseif($hasil->averageAttitude <= 6) Anda memiliki attitude yang cukup baik @elseif($hasil->averageAttitude <= 9) Anda memiliki attitude yang baik @elseif($hasil->averageAttitude <= 12) Anda memiliki attitude yang sangat baik @endif </td>
-                                                    <td rowspan="8">{{ $saran->value_essay }}</td>
+                                                    @foreach ($saran as $data )
+                                                    <td rowspan="8">{{ $data->value_essay }}</td>
+                                                    @endforeach
                                                 </tr>
                                                 <tr>
                                                     <td>2.</td>

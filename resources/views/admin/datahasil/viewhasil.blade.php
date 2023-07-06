@@ -5,6 +5,7 @@
 use Carbon\Carbon;
 @endphp
 
+
 <style>
     @media print {
         .print-hidden {
@@ -36,56 +37,43 @@ use Carbon\Carbon;
         @endif
 
         <div class="card-body">
-            @can('hrd')
-            <a href="/datahasil/cetak" target="_blank" class="print-hidden mb-4 btn btn-primary float-right"><i class="bi bi-printer-fill mr-2"></i>Cetak Data Hasil</a>
-            @endcan
             <div class="table-responsive">
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                     <thead>
                         <tr>
                             <th>No</th>
-                            <th style="text-align: center; width: 5%;">Nama Karyawan</th>
-                            <th style="text-align: center; width: 5%; ">Nama Pengisi</th>
-                            <th style="text-align: center; ">Tanggal Pengisian</th>
-                            <th>Attitude</th>
-                            <th>Kedisiplinan</th>
-                            <th>Inisiatif</th>
-                            <th>Leadership</th>
-                            <th>Kerjasama</th>
-                            <th>Kehadiran</th>
-                            <th>Tanggung Jawab</th>
-                            <th>Komunikasi</th>
-                            <th>Periode</th>
+                            <th>Nama Karyawan</th>
+                            <th>Tanggal Masuk</th>
+                            <th>Divisi</th>
+                            <th>Status</th>
+                            <th style="width: 10%">Action</th>
                         </tr>
                     </thead>
                     <tfoot>
                         @php $no = 1; @endphp
-                        @foreach ($hasil as $data)
+                        @foreach ($view as $data)
                         <tr>
                             <th>{{ $no++ }}</th>
-                            <td>{{ $data->nama_karyawan }}</td>
-                            <td>{{ $data->nama_karyawan2 }}</td>
-                            <td>{{ Carbon::parse($data->tanggal_pengisian)->format('d-m-Y') }}</td>
+                            <td>{{ $data->nama }}</td>
+                            <td>{{ Carbon::parse($data->tanggal_masuk)->format('d-m-Y') }}</td>
+                            <td> @if ($data->divisi_id == 2)
+                                Software Quality Assurance
+                                @elseif($data->divisi_id == 3)
+                                Backend
+                                @elseif($data->divisi_id == 4)
+                                Frontend
+                                @elseif($data->divisi_id == 6)
+                                API Tester
+                                @endif
+                            </td>
+                            <td>{{ $data->status }}</td>
                             <td>
-                                @if ($data->attitude <= 3) Kurang @elseif($data->attitude <= 6) Cukup @elseif($data->attitude <= 9) Baik @elseif($data->attitude <= 12) Sangat Baik @endif </td>
-                            <td>
-                                @if ($data->kedisiplinan <= 3) Kurang @elseif($data->kedisiplinan <= 6) Cukup @elseif($data->kedisiplinan <= 9) Baik @elseif($data->kedisiplinan <= 12) Sangat Baik @endif </td>
-                            <td>
-                                @if ($data->inisiatif <= 3) Kurang @elseif($data->inisiatif <= 6) Cukup @elseif($data->inisiatif <= 9) Baik @elseif($data->inisiatif <= 12) Sangat Baik @endif </td>
-                            <td>
-                                @if ($data->leadership <= 3) Kurang @elseif($data->leadership <= 6) Cukup @elseif($data->leadership <= 9) Baik @elseif($data->leadership <= 12) Sangat Baik @endif </td>
-                            <td>
-                                @if ($data->kerjasama <= 3) Kurang @elseif($data->kerjasama <= 6) Cukup @elseif($data->kerjasama <= 9) Baik @elseif($data->kerjasama <= 12) Sangat Baik @endif </td>
-                            <td>
-                                @if ($data->kehadiran <= 3) Kurang @elseif($data->kehadiran <= 6) Cukup @elseif($data->kehadiran <= 9) Baik @elseif($data->kehadiran <= 12) Sangat Baik @endif </td>
-                            <td>
-                                @if ($data->tanggungjawab <= 3) Kurang @elseif($data->tanggungjawab <= 6) Cukup @elseif($data->tanggungjawab <= 9) Baik @elseif($data->tanggungjawab <= 12) Sangat Baik @endif </td>
-                            <td>
-                                @if ($data->komunikasi <= 3) Kurang @elseif($data->komunikasi <= 6) Cukup @elseif($data->komunikasi <= 9) Baik @elseif($data->komunikasi <= 12) Sangat Baik @endif </td>
-                            <td>{{ $data->bulan }}</td>
+                                <a href="/hrd/detailhasil/{{$data->id}}" class="btn btn-primary"><i class="bi bi-eye-fill"></i></a>
+                                <a href="/datahasil/cetak/{{$data->id}}" class="btn btn-danger"><i class="bi bi-printer"></i></a>
+                            </td>
                         </tr>
-                        @endforeach
                         </tbody>
+                        @endforeach
                 </table>
             </div>
         </div>

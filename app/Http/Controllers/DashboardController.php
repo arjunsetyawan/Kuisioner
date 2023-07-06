@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
 use App\Models\Dashboard;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -16,6 +17,11 @@ class DashboardController extends Controller
      */
     public function index()
     {
+        $bulansekarang = Carbon::now()->month;
+        $periodeId = DB::table('periode')
+            ->where('id_periode', $bulansekarang)
+            ->value('id_periode');
+
         if (Auth::user()) {
             if (Auth::user()->role_id == 1 && Auth::user()->status == "Active") {
                 $users = DB::table('users')->count();
@@ -29,7 +35,7 @@ class DashboardController extends Controller
                 $divisi = DB::table('divisi')->count();
                 $kriteria = DB::table('kriteria')->count();
                 $pertanyaan = DB::table('pertanyaan')->count();
-                $hasil = DB::table('hasil')->count();
+                $hasil = DB::table('hasil')->where('periode_id', $periodeId)->count();
                 $karyawan = DB::table('users')->where('role_id', 2)->count();
                 $selisih = $karyawan - $hasil;
                 return view('admin.index', ['users' => $users, 'divisi' => $divisi, 'kriteria' => $kriteria, 'pertanyaan' => $pertanyaan, 'hasil' => $hasil, 'selisih' => $selisih, 'karyawan' => $karyawan]);
