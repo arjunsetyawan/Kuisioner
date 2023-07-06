@@ -16,6 +16,7 @@ class DataUser extends Model
         'email',
         'password',
         'role_id',
-        'status'
+        'status',
+        'status_ajuan',
     ];
 }

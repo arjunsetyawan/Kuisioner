@@ -12,6 +12,8 @@ class KaryawanController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+     //menampilkan halaman data karyawan
     public function index()
     {
         $karyawan = DB::table('karyawan')

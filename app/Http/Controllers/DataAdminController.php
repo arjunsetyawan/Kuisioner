@@ -15,6 +15,8 @@ class DataAdminController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+     //Menampilkan halaman data admin
     public function index()
     {
         $users = DB::table('users')
@@ -28,6 +30,8 @@ class DataAdminController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+     //menampilkan halaman tambah data admin
     public function create()
     {
         return view('admin.dataadmin.tambahadmin', ['roles' => Role::all()]);
@@ -39,6 +43,8 @@ class DataAdminController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+
+     //menyimpan data admin
     public function store(Request $request)
     {
         $validateData = $request->validate([
@@ -70,6 +76,8 @@ class DataAdminController extends Controller
      * @param  \App\Models\DataAdmin  $dataAdmin
      * @return \Illuminate\Http\Response
      */
+
+     //menampilkan halaman edit data admin
     public function edit($id)
     {
         $data = DataAdmin::find($id);
@@ -83,6 +91,8 @@ class DataAdminController extends Controller
      * @param  \App\Models\DataAdmin  $dataAdmin
      * @return \Illuminate\Http\Response
      */
+
+     //mengupdate data admin
     public function update(Request $request, DataAdmin $id)
     {
         $validateData = $request->validate([

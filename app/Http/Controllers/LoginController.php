@@ -14,11 +14,14 @@ class LoginController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+     //Menampilkan halaman login
     public function index()
     {
         return view('auth.login');
     }
 
+    //Authentikasi login
     public function auth(Request $request)
     {
         $input = $request->all();
@@ -28,6 +31,7 @@ class LoginController extends Controller
 
         ]);
 
+        //Validasi Captcha
         $recaptcha_secret = "6Le1A8ImAAAAAEJ6__CVfPZC_-6G8m_2My8aYiKL";
         $response = file_get_contents("https://www.google.com/recaptcha/api/siteverify?secret=" . $recaptcha_secret . "&response=" . $input['g-recaptcha-response']);
         $response = json_decode($response, true);
@@ -43,12 +47,8 @@ class LoginController extends Controller
         }
         return back()->with('loginError', 'Email atau password salah!');
     }
-    // if (Auth::attempt($credentials)) {
-    //     $request->session()->regenerate();
-    //     return redirect()->intended('/');
-    // }
 
-
+    //Logout
     public function logout()
     {
         Auth::logout();

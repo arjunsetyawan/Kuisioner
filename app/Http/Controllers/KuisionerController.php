@@ -7,7 +7,6 @@ use App\Models\Kuisioner;
 use App\Models\Pertanyaan;
 use App\Models\User;
 use Carbon\Carbon;
-use Dflydev\DotAccessData\Data;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -20,6 +19,7 @@ class KuisionerController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    //menampilkan halaman kuisioner
     public function index()
     {
         $bulansekarang = Carbon::now()->month;
@@ -36,11 +36,8 @@ class KuisionerController extends Controller
         $userActive = User::where('users.id', Auth::user()->id)->join('karyawan', 'users.id', '=', 'karyawan.user_id')
             ->first();
 
-
         //mengambil data pegawai yang sudah diisi kuisioner
         $userJoin = User::join('hasil', 'users.id', '=', 'hasil.karyawan_id2')->where('hasil.karyawan_id2', Auth::user()->id)->where('hasil.periode_id',  $periodeId)->get();
-        // dd($userJoin);
-        // dd($userJoin[0]->periode_id != $periodeId);
 
         //mengambil data karyawan yang satu divisi
         $user = User::where('users.role_id', 2)->join('karyawan', 'users.id', '=', 'karyawan.user_id')->where('karyawan.divisi_id', $userActive->divisi_id)->get();
@@ -76,7 +73,6 @@ class KuisionerController extends Controller
             $user = User::where('id', $item)->first();
             array_push($users, $user);
         }
-
         return view('user.viewkuisioner', ['pertanyaan' => $pertanyaan, 'kriteria' => DataKriteria::all(), 'users' => $users]);
     }
 
@@ -96,6 +92,8 @@ class KuisionerController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+
+    //menyimpan data kuisioner
     public function store(Request $request)
     {
         $datas = $request->all();

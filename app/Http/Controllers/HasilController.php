@@ -42,6 +42,7 @@ class HasilController extends Controller
         return view('admin.datahasil.cetakhasil', ['cetak' => $cetak]);
     }
 
+    //menampilkan halaman hasil kuisioner user
     public function hasilPenilaian()
     {
         $hasil = DB::table('hasil')
@@ -63,17 +64,15 @@ class HasilController extends Controller
 
         $users = Auth::user();
         $karyawan = Karyawan::where('divisi_id', $users->karyawan2->divisi_id)->count();
-        // dd($pengisi, $karyawan);
 
         $saran = DB::table('hasil')
             ->where('karyawan_id', auth()->user()->id)
-            // ->orderByDesc('id')
             ->get();
-        // dd($saran);
 
         return view('user.datahasil.hasilkuisioner', ['hasil' => $hasil, 'saran' => $saran, 'pengisi' => $pengisi, 'karyawan' => $karyawan]);
     }
 
+    //mencetak halaman hasil kuisioner user
     public function cetakPenilaian()
     {
         $hasil = DB::table('hasil')
@@ -115,7 +114,9 @@ class HasilController extends Controller
 
         $datadetail = DB::table('hasil')
             ->where('karyawan_id', $id)
+            ->where('periode_id', $bulansekarang)
             ->get();
+        // dd($datadetail);
 
         // dd($dataAvg);
         if ($searchBulan != null) {
@@ -159,7 +160,7 @@ class HasilController extends Controller
         $dataAvg['tanggungjawab'] = $dataAvg['tanggungjawab'] / $count;
         $dataAvg['komunikasi'] = $dataAvg['komunikasi'] / $count;
 
-        // dd($dataAvg);
+        // dd($datadetail, $detail, $dataAvg);
         $periode = DB::table('periode')
             ->get();
 
@@ -169,7 +170,7 @@ class HasilController extends Controller
             ->first();
         // dd($datakaryawan);
 
-        return view('/admin/datahasil/detailhasil', ['datadetail' => $dataAvg, 'periode' => $periode, 'searchBulan' => $searchBulan , 'datakaryawan' => $datakaryawan]);
+        return view('/admin/datahasil/detailhasil', ['datadetail' => $dataAvg, 'periode' => $periode, 'searchBulan' => $searchBulan, 'datakaryawan' => $datakaryawan]);
     }
 
     public function datadetail($id)

@@ -14,6 +14,7 @@ class ProfilController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    //menampilkan halaman profil
     public function index()
     {
         $profil = DB::table('karyawan')
@@ -38,6 +39,8 @@ class ProfilController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+
+     //menyimpan data profil jika belum ada data
     public function store(Request $request)
     {
         $profile = Profil::where('user_id', '=', auth()->user()->id)->first();
@@ -54,6 +57,8 @@ class ProfilController extends Controller
                 'user_id' => 'required',
             ]);
             Profil::create($validateData);
+
+            // update data profil jika sudah ada data
         } else {
             $validateData = $request->validate([
                 'nama' => 'required',
@@ -68,8 +73,6 @@ class ProfilController extends Controller
             ]);
             $profile->update($validateData);
         }
-
-
         return redirect()->route('viewprofil')->with('success', 'Profil berhasil ditambahkan!');
     }
     /**

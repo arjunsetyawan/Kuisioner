@@ -14,11 +14,12 @@ class AjuanController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    //Menampilkan halaman data ajuan
     public function index()
     {
         $ajuan = DB::table('ajuan')
             ->get();
-        // dd($ajuan);
         return view('/admin/dataajuan/viewajuan', ['ajuan' => $ajuan]);
     }
 
@@ -60,6 +61,8 @@ class AjuanController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+
+     //menampilkan halaman update data ajuan
     public function edit($id)
     {
         $data = Ajuan::find($id);
@@ -73,6 +76,8 @@ class AjuanController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+
+     //menyimpan data ajuan
     public function update(Request $request, Ajuan $id)
     {
         $validateData = $request->validate([

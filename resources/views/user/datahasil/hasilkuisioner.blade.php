@@ -141,7 +141,11 @@
                                     <div class="card-body">
                                         <div class="container">
                                             <div class="left">
+                                                @if ($pengisi == $karyawan )
                                                 <a href="/cetak" target="_blank" class="print-hidden mb-4 btn btn-primary"><i class="bi bi-printer-fill"></i>Cetak Data Hasil</a>
+                                                @else
+
+                                                @endif
                                             </div>
                                             <div class="right">
                                                 <p>Telah diisi {{$pengisi}} dari {{$karyawan}}</p>
@@ -170,7 +174,7 @@
                                                     <td>{{ number_format($hasil->averageAttitude * 100/12 ) }}%</td>
                                                     <td>
                                                         @if ($hasil->averageAttitude <= 3) Anda memiliki attitude yang kurang aik @elseif($hasil->averageAttitude <= 6) Anda memiliki attitude yang cukup baik @elseif($hasil->averageAttitude <= 9) Anda memiliki attitude yang baik @elseif($hasil->averageAttitude <= 12) Anda memiliki attitude yang sangat baik @endif </td>
-                                                    @foreach ($saran as $data )
+                                                                        @foreach ($saran as $data )
                                                     <td rowspan="8">{{ $data->value_essay }}</td>
                                                     @endforeach
                                                 </tr>

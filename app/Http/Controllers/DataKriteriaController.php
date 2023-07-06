@@ -13,10 +13,11 @@ class DataKriteriaController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    //menampilkan halaman data kriteria
     public function index()
     {
         $kriteria = DB::table('kriteria')
-            // ->get()
             ->paginate(4);
         return view('admin.datakriteria.viewkriteria', ['kriteria' => $kriteria]);
     }
@@ -26,6 +27,8 @@ class DataKriteriaController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    //menampilkan halaman tambah data kriteria
     public function create()
     {
         return view('admin.datakriteria.tambahkriteria');
@@ -37,6 +40,8 @@ class DataKriteriaController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+
+    //menyimpan data kriteria
     public function store(Request $request)
     {
         $validateData = $request->validate([
@@ -64,10 +69,11 @@ class DataKriteriaController extends Controller
      * @param  \App\Models\DataKriteria  $dataKriteria
      * @return \Illuminate\Http\Response
      */
+
+    //menampilkan halaman edit data kriteria
     public function edit($id_kriteria)
     {
         $data = DataKriteria::find($id_kriteria);
-        // dd($data);
         return view('admin.datakriteria.updatekriteria', ['data' => $data]);
     }
 
@@ -78,13 +84,14 @@ class DataKriteriaController extends Controller
      * @param  \App\Models\DataKriteria  $dataKriteria
      * @return \Illuminate\Http\Response
      */
+
+    //mengupdate data kriteria
     public function update(Request $request, DataKriteria $id_kriteria)
     {
         $validateData = $request->validate([
             'kriteria' => 'required',
             'detail_kriteria' => 'required'
         ]);
-        // dd($d);
         $id_kriteria->update($validateData);
         return redirect()->route('viewkriteria')->with('success', 'Sukses update!');
     }

@@ -15,6 +15,8 @@ class PertanyaanController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    //menampilkan halaman data pertanyaan
     public function index()
     {
         $pertanyaan = DB::table('pertanyaan')
@@ -30,6 +32,8 @@ class PertanyaanController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+     //Menampilkan halaman tambah data pertanyaan
     public function create()
     {
         return view('admin.datapertanyaan.tambahpertanyaan', ['kriterias' => DataKriteria::all(), 'periodes' => Periode::all()]);
@@ -41,6 +45,8 @@ class PertanyaanController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+
+     //Menyimpan data pertanyaan
     public function store(Request $request)
     {
         // dd($request->all());
@@ -49,8 +55,6 @@ class PertanyaanController extends Controller
             'nama_pertanyaan' => 'required',
             'periode_id' => 'required'
         ]);
-
-
         Pertanyaan::create($validateData);
         return redirect()->route('viewpertanyaan')->with('success', 'Pertanyaan baru telah ditambahkan!');
     }
@@ -72,6 +76,8 @@ class PertanyaanController extends Controller
      * @param  \App\Models\Pertanyaan  $pertanyaan
      * @return \Illuminate\Http\Response
      */
+
+     //Menampilkan halaman edit data pertanyaan
     public function edit($id)
     {
         // dd($id);
@@ -87,6 +93,8 @@ class PertanyaanController extends Controller
      * @param  \App\Models\Pertanyaan  $pertanyaan
      * @return \Illuminate\Http\Response
      */
+
+     //Mengupdate data pertanyaan
     public function update(Request $request, Pertanyaan $id)
     {
         $validateData = $request->validate([
@@ -94,8 +102,6 @@ class PertanyaanController extends Controller
             'nama_pertanyaan' => 'required',
             'periode_id' => 'required'
         ]);
-
-        // dd($validateData);
         $id->update($validateData);
         return redirect()->route('viewpertanyaan')->with('sukses', 'Data Pertanyaan berhasil diupdate!');
     }

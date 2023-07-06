@@ -18,6 +18,8 @@ class DataUserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+     //Menampilkan halaman data user
     public function index()
     {
         $users = DB::table('users')
@@ -31,6 +33,8 @@ class DataUserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+     //menampilkan halaman tambah data user
     public function create()
     {
         return view('admin.datauser.tambahuser', ['roles' => Role::all()]);
@@ -42,6 +46,8 @@ class DataUserController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+
+     //menyimpan data user
     public function store(Request $request)
     {
         // dd($request->all());
@@ -81,6 +87,8 @@ class DataUserController extends Controller
      * @param  \App\Models\DataUser  $dataUser
      * @return \Illuminate\Http\Response
      */
+
+     //menampilkan halaman edit data user
     public function edit($id)
     {
         $data = DataUser::find($id);
@@ -94,6 +102,8 @@ class DataUserController extends Controller
      * @param  \App\Models\DataUser  $dataUser
      * @return \Illuminate\Http\Response
      */
+
+     //Menyimpan update data user
     public function update(Request $request, DataUser $id)
     {
         $validateData = $request->validate([

@@ -13,6 +13,8 @@ class DataDivisiController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+     //menampilkan halaman data divisi
     public function index()
     {
         $divisi = DB::table('divisi')
@@ -25,6 +27,8 @@ class DataDivisiController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+     //menampilkan halaman tambah data divisi
     public function create()
     {
         return view('admin.datadivisi.tambahdivisi');
@@ -36,6 +40,8 @@ class DataDivisiController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+
+     //menyimpan data divisi
     public function store(Request $request)
     {
         // dd($request->all());
@@ -66,6 +72,8 @@ class DataDivisiController extends Controller
      * @param  \App\Models\DataDivisi  $dataDivisi
      * @return \Illuminate\Http\Response
      */
+
+    //menampilkan halaman edit data divisi
     public function edit($id)
     {
         $data = DataDivisi::find($id);
@@ -80,6 +88,8 @@ class DataDivisiController extends Controller
      * @param  \App\Models\DataDivisi  $dataDivisi
      * @return \Illuminate\Http\Response
      */
+
+     //menyimpan data divisi yang telah diupdate
     public function update(Request $request, DataDivisi $id)
     {
         $validateData = $request->validate([

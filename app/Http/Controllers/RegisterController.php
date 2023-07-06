@@ -15,6 +15,8 @@ class RegisterController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+     //menampilkan halaman ajuan
     public function index()
     {
         return view('auth.login');
@@ -35,6 +37,8 @@ class RegisterController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+
+    //menyimpan data ajuan
     public function store(Request $request)
     {
         $validateData = $request->validate([
@@ -44,7 +48,7 @@ class RegisterController extends Controller
             'role_id' => 'required',
 
         ]);
-        $validateData['status_akun'] = 'Inactive';
+        $validateData['status'] = 'Inactive';
         $validateData['status_ajuan'] = 'Menunggu Admin';
         Ajuan::create($validateData);
         $request->session()->flash('success', 'Ajuan Berhasil, silahkan tunggu konfirmasi dari admin');

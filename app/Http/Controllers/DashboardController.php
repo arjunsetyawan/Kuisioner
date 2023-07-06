@@ -15,6 +15,8 @@ class DashboardController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+     //menampilkan halaman dashboard
     public function index()
     {
         $bulansekarang = Carbon::now()->month;
@@ -23,6 +25,7 @@ class DashboardController extends Controller
             ->value('id_periode');
 
         if (Auth::user()) {
+            //menampilkan dashboard admin
             if (Auth::user()->role_id == 1 && Auth::user()->status == "Active") {
                 $users = DB::table('users')->count();
                 $divisi = DB::table('divisi')->count();
@@ -30,6 +33,8 @@ class DashboardController extends Controller
                 $pertanyaan = DB::table('pertanyaan')->count();
                 $ajuan = DB::table('ajuan')->count();
                 return view('admin.index', ['users' => $users, 'divisi' => $divisi, 'kriteria' => $kriteria, 'pertanyaan' => $pertanyaan, 'ajuan' => $ajuan]);
+
+                //Menampilkan dashboard Hrd
             } elseif (Auth::user()->role_id == 3 && Auth::user()->status == "Active") {
                 $users = DB::table('users')->count();
                 $divisi = DB::table('divisi')->count();
@@ -39,6 +44,8 @@ class DashboardController extends Controller
                 $karyawan = DB::table('users')->where('role_id', 2)->count();
                 $selisih = $karyawan - $hasil;
                 return view('admin.index', ['users' => $users, 'divisi' => $divisi, 'kriteria' => $kriteria, 'pertanyaan' => $pertanyaan, 'hasil' => $hasil, 'selisih' => $selisih, 'karyawan' => $karyawan]);
+
+                //Menampilkan dashboard User
             } elseif (Auth::user()->role_id == 2 && Auth::user()->status == "Active") {
                 $data = DB::table('kriteria')
                     ->get();
