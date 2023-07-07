@@ -125,7 +125,7 @@ Route::middleware(['auth', 'IsHRD'])->group(function () {
     //HRD -> Data Hasil
     Route::get('/hrd/viewhasil', [HasilController::class, 'index']);
     Route::get('/hrd/detailhasil/{id}', [HasilController::class, 'detail']);
-    Route::get('/datahasil/cetak', [HasilController::class, 'cetak'])->name('cetakhasil');
+    Route::get('/hrd/cetakhasil/', [HasilController::class, 'cetak'])->name('cetakhasil');
 
     //HRD -> Data Karyawan
     Route::get('/hrd/viewkaryawan', [KaryawanController::class, 'index']);

@@ -37,6 +37,7 @@ use Carbon\Carbon;
         @endif
 
         <div class="card-body">
+            <a href="/hrd/cetakhasil/" class="btn btn-danger mb-2 justify-content-end float-right"><i class="bi bi-printer me-2 "></i>Cetak Data Seluruh Karyawan</a>
             <div class="table-responsive">
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                     <thead>
@@ -69,7 +70,6 @@ use Carbon\Carbon;
                             <td>{{ $data->status }}</td>
                             <td>
                                 <a href="/hrd/detailhasil/{{$data->id}}" class="btn btn-primary"><i class="bi bi-eye-fill"></i></a>
-                                <a href="/datahasil/cetak/{{$data->id}}" class="btn btn-danger"><i class="bi bi-printer"></i></a>
                             </td>
                         </tr>
                         </tbody>
