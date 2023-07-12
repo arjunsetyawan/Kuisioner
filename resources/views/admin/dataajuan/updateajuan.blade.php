@@ -27,15 +27,6 @@
                         @enderror
                     </div>
                     <div class="mb-3">
-                        <label for="password" class="form-label @error('password') is-invalid @enderror">Password</label>
-                        <input type="text" class="form-control" id="password" name="password" value="{{ old('password', $data->password) }}" disabled>
-                        @error('password')
-                        <div class="invalid-feedback">
-                            {{ $message }}
-                        </div>
-                        @enderror
-                    </div>
-                    <div class="mb-3">
                         <label for="Role" class="form-label">Role</label>
                         <select class="form-select form-control @error('role_id') is-invalid @enderror" name="role_id" disabled>
                             @foreach ($roles as $role)

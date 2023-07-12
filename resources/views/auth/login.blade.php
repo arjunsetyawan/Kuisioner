@@ -110,14 +110,6 @@
                             </div>
                             @enderror
                         </div>
-                        <div class="form-group mb-4">
-                            <input type="password" class="form-control @error('password') is-invalid @enderror" id="password" name="password" placeholder="Password">
-                            @error('password')
-                            <div class="invalid-feedback">
-                                {{ $message }}
-                            </div>
-                            @enderror
-                        </div>
                         <input type="hidden" class="form-control" id="role_id" value="2" name="role_id">
                         <input type="submit" class="btn btn-block btn-primary">
                     </div>

@@ -15,7 +15,7 @@ class LoginController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-     //Menampilkan halaman login
+    //Menampilkan halaman login
     public function index()
     {
         return view('auth.login');
@@ -47,6 +47,8 @@ class LoginController extends Controller
         }
         return back()->with('loginError', 'Email atau password salah!');
     }
+
+
 
     //Logout
     public function logout()

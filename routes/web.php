@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AjuanController;
+use App\Http\Controllers\AkunController;
 use App\Http\Controllers\HasilController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\ProfilController;
@@ -55,6 +56,9 @@ Route::middleware(['auth', 'IsUser'])->group(function () {
     //User -> Hasil
     Route::get('/hasil', [HasilController::class, 'hasilPenilaian']);
     Route::get('/cetak', [HasilController::class, 'cetakPenilaian'])->name('cetakkuisioner');
+
+    Route::get('/info', [AkunController::class, 'index'])->name('viewinfo');
+    Route::post('/info/tambah', [AkunController::class, 'store']);
 });
 
 Route::middleware(['auth', 'IsAdmin'])->group(function () {

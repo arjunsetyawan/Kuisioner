@@ -90,6 +90,11 @@
                                     <div data-i18n="Connections">Cetak Hasil</div>
                                 </a>
                             </li>
+                            <li class="menu-item">
+                                <a href="/info" class="menu-link">
+                                    <div data-i18n="Account">Info Akun</div>
+                                </a>
+                            </li>
                         </ul>
                         <hr>
                     </li>

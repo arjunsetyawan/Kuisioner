@@ -2,24 +2,21 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Ajuan;
+use App\Models\Akun;
 use Illuminate\Http\Request;
-use App\Models\User;
+use App\Events\PasswordChanged;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Mail;
 
-class RegisterController extends Controller
+class AkunController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-
-    //menampilkan halaman ajuan
     public function index()
     {
-        return view('auth.login');
+        return view('user.infoakun');
     }
 
     /**
@@ -29,6 +26,7 @@ class RegisterController extends Controller
      */
     public function create()
     {
+        //
     }
 
     /**
@@ -37,30 +35,25 @@ class RegisterController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-
-    //menyimpan data ajuan
     public function store(Request $request)
     {
-        $validateData = $request->validate([
-            'nama' => 'required|min:5',
-            'email' => 'required|email:dns|unique:ajuan,email',
-            'role_id' => 'required',
+        $akun = Akun::where('id', '=', auth()->user()->id)->first();
+        $validateData = $request->validate(
+            ['password' => 'required']
+        );
+        $validateData['password'] = Hash::make($validateData['password']);
+        $akun->update($validateData);
 
-        ]);
-        $validateData['status'] = 'Inactive';
-        $validateData['status_ajuan'] = 'Menunggu Admin';
-        Ajuan::create($validateData);
-        $request->session()->flash('success', 'Ajuan Berhasil, silahkan tunggu konfirmasi dari admin');
-        return view('auth.login');
+        return redirect()->route('viewinfo')->with('success', 'Password berhasil diubah');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Models\Akun  $akun
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Akun $akun)
     {
         //
     }
@@ -68,10 +61,10 @@ class RegisterController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Models\Akun  $akun
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Akun $akun)
     {
         //
     }
@@ -80,10 +73,10 @@ class RegisterController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \App\Models\Akun  $akun
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Akun $akun)
     {
         //
     }
@@ -91,10 +84,10 @@ class RegisterController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  \App\Models\Akun  $akun
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Akun $akun)
     {
         //
     }

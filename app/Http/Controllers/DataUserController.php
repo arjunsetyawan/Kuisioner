@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Str;
 
 use function PHPSTORM_META\map;
 
@@ -19,7 +20,7 @@ class DataUserController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-     //Menampilkan halaman data user
+    //Menampilkan halaman data user
     public function index()
     {
         $users = DB::table('users')
@@ -34,10 +35,11 @@ class DataUserController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-     //menampilkan halaman tambah data user
+    //menampilkan halaman tambah data user
     public function create()
     {
-        return view('admin.datauser.tambahuser', ['roles' => Role::all()]);
+        $password = Str::random(10);
+        return view('admin.datauser.tambahuser', ['roles' => Role::all(), 'password' => $password]);
     }
 
     /**
@@ -47,14 +49,14 @@ class DataUserController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-     //menyimpan data user
+    //menyimpan data user
     public function store(Request $request)
     {
         // dd($request->all());
         $validateData = $request->validate([
             'nama' => 'required|min:5',
             'email' => 'required|email:dns|unique:users,email',
-            'password' => 'required|min:8|max:255',
+            'password' => 'required',
             'role_id' => 'required',
             'status' => 'required'
         ]);
@@ -88,7 +90,7 @@ class DataUserController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-     //menampilkan halaman edit data user
+    //menampilkan halaman edit data user
     public function edit($id)
     {
         $data = DataUser::find($id);
@@ -103,7 +105,7 @@ class DataUserController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-     //Menyimpan update data user
+    //Menyimpan update data user
     public function update(Request $request, DataUser $id)
     {
         $validateData = $request->validate([

@@ -30,7 +30,6 @@
                             <th>No</th>
                             <th>Nama</th>
                             <th>Email</th>
-                            <th>Password</th>
                             <th>Role</th>
                             <th>Status Akun</th>
                             <th>Status Ajuan</th>
@@ -46,7 +45,6 @@
                             <th>{{ $no++ }}</th>
                             <td>{{ $data->nama }}</td>
                             <td>{{ $data->email }}</td>
-                            <td>{{ $data->password }}</td>
                             <td>
                                 @if ($data->role_id == 2)
                                 User
