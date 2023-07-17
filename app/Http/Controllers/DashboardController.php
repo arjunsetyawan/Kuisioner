@@ -16,7 +16,7 @@ class DashboardController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-     //menampilkan halaman dashboard
+    //menampilkan halaman dashboard
     public function index()
     {
         $bulansekarang = Carbon::now()->month;
@@ -43,7 +43,17 @@ class DashboardController extends Controller
                 $hasil = DB::table('hasil')->where('periode_id', $periodeId)->count();
                 $karyawan = DB::table('users')->where('role_id', 2)->count();
                 $selisih = $karyawan - $hasil;
-                return view('admin.index', ['users' => $users, 'divisi' => $divisi, 'kriteria' => $kriteria, 'pertanyaan' => $pertanyaan, 'hasil' => $hasil, 'selisih' => $selisih, 'karyawan' => $karyawan]);
+
+
+                $bulansekarang = Carbon::now()->month;
+                $hasilkuisioner = DB::table('hasil')
+                    ->join('users', 'users.id', '=', 'hasil.karyawan_id')
+                    ->where('periode_id', $bulansekarang)
+                    ->get();
+
+                // dd($attitude);
+
+                return view('admin.index', ['users' => $users, 'divisi' => $divisi, 'kriteria' => $kriteria, 'pertanyaan' => $pertanyaan, 'hasil' => $hasil, 'selisih' => $selisih, 'karyawan' => $karyawan, 'hasilkuisioner' => $hasilkuisioner]);
 
                 //Menampilkan dashboard User
             } elseif (Auth::user()->role_id == 2 && Auth::user()->status == "Active") {

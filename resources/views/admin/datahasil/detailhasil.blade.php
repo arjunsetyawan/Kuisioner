@@ -61,20 +61,63 @@ use Carbon\Carbon;
         <input type="text" class="form-control" id="tanggungjawab" name="tanggungjawab" hidden value="{{$datadetail['tanggungjawab']}}">
         <input type="text" class="form-control" id="komunikasi" name="komunikasi" hidden value="{{$datadetail['komunikasi']}}">
 
-        <div style="width: 85%;" class="card-body">
-            <div>
-                <h6 class="m-0 font-weight-bold">Nama Karyawan : {{$datakaryawan->nama}}</h6>
-                <h6 class="m-0 font-weight-bold">Tanggal Masuk : {{Carbon::parse($datakaryawan->tanggal_masuk)->format('d-m-Y')}}</h6>
-                <h6 class="m-0 font-weight-bold">Divisi : @if ($datakaryawan->divisi_id == 2)
-                    Software Quality Assurance
-                    @elseif($datakaryawan->divisi_id == 3)
-                    Backend
-                    @elseif($datakaryawan->divisi_id == 4)
-                    Frontend
-                    @elseif($datakaryawan->divisi_id == 6)
-                    API Tester
-                    @endif</h6>
-                <canvas id="myChart" class=" justify-content-center"></canvas>
+
+        <div class="row">
+            <div class="table-responsive" style="width: 30%; margin-top:52px; margin-left:10px;">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <tbody>
+                        <tr>
+                            <td>Nama Karyawan</td>
+                            <td style="width: 5%;">:</td>
+                            <td>{{$datakaryawan->nama}}</td>
+                        </tr>
+                        <tr>
+                            <td>Jenis Kelamin</td>
+                            <td style="width: 5%;">:</td>
+                            <td>{{$datakaryawan->gender}}</td>
+                        </tr>
+                        <tr>
+                            <td>Tanggal Masuk</td>
+                            <td style="width: 5%;">:</td>
+                            <td>{{Carbon::parse($datakaryawan->tanggal_masuk)->format('d-m-Y')}}</td>
+                        </tr>
+                        <tr>
+                            <td>Divisi</td>
+                            <td style="width: 5%;">:</td>
+                            <td>@if ($datakaryawan->divisi_id == 2)
+                                Software Quality Assurance
+                                @elseif($datakaryawan->divisi_id == 3)
+                                Backend
+                                @elseif($datakaryawan->divisi_id == 4)
+                                Frontend
+                                @elseif($datakaryawan->divisi_id == 6)
+                                API Tester
+                                @endif
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Tempat & Tanggal Lahir</td>
+                            <td style="width: 5%;">:</td>
+                            <td>{{ $datakaryawan->tempat_lahir }}, {{ Carbon::parse($datakaryawan->tanggal_lahir)->format('d-m-Y')}}</td>
+                        </tr>
+                        <tr>
+                            <td>Alamat</td>
+                            <td style="width: 5%;">:</td>
+                            <td>{{ $datakaryawan->alamat }}</td>
+                        </tr>
+                        <tr>
+                            <td>No Telepon</td>
+                            <td style="width: 5%;">:</td>
+                            <td>{{ $datakaryawan->no_telp }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div style="width: 50%;" class="card-body">
+                <div>
+                    <canvas id="myChart" class="d-flex justify-content-center"></canvas>
+                </div>
             </div>
         </div>
     </div>
@@ -119,4 +162,5 @@ use Carbon\Carbon;
         }
     });
 </script>
+
 @endsection

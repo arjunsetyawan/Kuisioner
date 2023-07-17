@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
 
-    <title>Profil Karyawan</title>
+    <title>Info Akun</title>
 
     <meta name="description" content="" />
 
@@ -123,7 +123,12 @@
                         @if (session()->has('success'))
                         <div class="alert alert-primary" role="alert">
                             {{ session('success') }}
+                        </div>
+                        @endif
 
+                        @if (session()->has('error'))
+                        <div class="alert alert-danger" role="alert">
+                            {{ session('error') }}
                         </div>
                         @endif
 
@@ -146,10 +151,32 @@
                                                 @enderror
                                             </div>
                                             <div class="mb-3 col-md-6">
-                                                <label class="form-label" for="password">Password</label>
+                                                <label class="form-label" for="old_password">Password Lama</label>
                                                 <div class="input-group input-group-merge">
-                                                    <input type="text" id="password" name="password" class="form-control @error('password') is-invalid @enderror" placeholder="Password" />
-                                                    @error('no_telp')
+                                                    <input type="text" id="old_password" name="old_password" class="form-control @error('password') is-invalid @enderror" placeholder="Old Password" />
+                                                    @error('password')
+                                                    <div class="invalid-feedback">
+                                                        {{ $message }}
+                                                    </div>
+                                                    @enderror
+                                                </div>
+                                            </div>
+                                            <div class="mb-3 col-md-6">
+                                                <label class="form-label" for="password">Password Baru</label>
+                                                <div class="input-group input-group-merge">
+                                                    <input type="text" id="new_password" name="new_password" class="form-control @error('password') is-invalid @enderror" placeholder="New Password" />
+                                                    @error('password')
+                                                    <div class="invalid-feedback">
+                                                        {{ $message }}
+                                                    </div>
+                                                    @enderror
+                                                </div>
+                                            </div>
+                                            <div class="mb-3 col-md-6">
+                                                <label class="form-label" for="repeat_password">Ulangi Password</label>
+                                                <div class="input-group input-group-merge">
+                                                    <input type="text" id="repeat_password" name="repeat_password" class="form-control @error('password') is-invalid @enderror" placeholder="Repeat Password" />
+                                                    @error('password')
                                                     <div class="invalid-feedback">
                                                         {{ $message }}
                                                     </div>

@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
+use App\Rules\Captcha;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use App\Rules\Captcha;
 
 
 class LoginController extends Controller
@@ -38,9 +39,14 @@ class LoginController extends Controller
         //
 
         if ($response["success"] === true) {
-            if (Auth::attempt($credentials)) {
+            $useraktif = User::where('email', $credentials['email'])->first();
+            if ($useraktif && $useraktif->status === "Active" && Auth::attempt($credentials)) {
                 $request->session()->regenerate();
                 return redirect()->intended('/');
+            } elseif (!$useraktif) {
+                return back()->with('loginError', 'Email atau password salah!');
+            } elseif ($useraktif && $useraktif->status !== "Active") {
+                return back()->with('loginError', 'Akun Anda tidak aktif.');
             }
         } else {
             return back()->with('loginError', 'Mohon Untuk isi validasi!');

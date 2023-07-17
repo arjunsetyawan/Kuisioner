@@ -45,6 +45,7 @@ class HasilController extends Controller
     //menampilkan halaman hasil kuisioner user
     public function hasilPenilaian()
     {
+        $bulansekarang = Carbon::now()->month;
         $hasil = DB::table('hasil')
             ->selectRaw('AVG(attitude) as averageAttitude,
                      AVG(kedisiplinan) as averageKedisplinan,
@@ -55,10 +56,13 @@ class HasilController extends Controller
                      AVG(tanggungjawab) as averageTanggungjawab,
                      AVG(komunikasi) as averageKomunikasi')
             ->where('karyawan_id', auth()->user()->id)
+            ->where('periode_id', $bulansekarang)
             ->first();
+        // dd($hasil);
 
         $pengisi = DB::table('hasil')
             ->where('karyawan_id', auth()->user()->id)
+            ->where('periode_Id', $bulansekarang)
             ->count();
         // dd($pengisi);
 
@@ -67,6 +71,7 @@ class HasilController extends Controller
 
         $saran = DB::table('hasil')
             ->where('karyawan_id', auth()->user()->id)
+            ->where('periode_id', $bulansekarang)
             ->get();
 
         return view('user.datahasil.hasilkuisioner', ['hasil' => $hasil, 'saran' => $saran, 'pengisi' => $pengisi, 'karyawan' => $karyawan]);
@@ -75,6 +80,7 @@ class HasilController extends Controller
     //mencetak halaman hasil kuisioner user
     public function cetakPenilaian()
     {
+        $bulansekarang = Carbon::now()->month;
         $hasil = DB::table('hasil')
             ->selectRaw('AVG(attitude) as averageAttitude,
                  AVG(kedisiplinan) as averageKedisplinan,
@@ -85,10 +91,12 @@ class HasilController extends Controller
                  AVG(tanggungjawab) as averageTanggungjawab,
                  AVG(komunikasi) as averageKomunikasi')
             ->where('karyawan_id', auth()->user()->id)
+            ->where('periode_id', $bulansekarang)
             ->first();
 
         $saran = DB::table('hasil')
             ->where('karyawan_id', auth()->user()->id)
+            ->where('periode_id', $bulansekarang)
             // ->orderByDesc('id')
             ->get();
 
@@ -171,6 +179,46 @@ class HasilController extends Controller
         // dd($datakaryawan);
 
         return view('/admin/datahasil/detailhasil', ['datadetail' => $dataAvg, 'periode' => $periode, 'searchBulan' => $searchBulan, 'datakaryawan' => $datakaryawan]);
+    }
+
+    public function cetakPenilaianOrang($id)
+    {
+        $bulansekarang = Carbon::now()->month;
+        $hasil = DB::table('hasil')
+            ->selectRaw('AVG(attitude) as averageAttitude,
+                 AVG(kedisiplinan) as averageKedisplinan,
+                 AVG(inisiatif) as averageInisiatif,
+                 AVG(leadership) as averageLeadership,
+                 AVG(kerjasama) as averageKerjasama,
+                 AVG(kehadiran) as averageKehadiran,
+                 AVG(tanggungjawab) as averageTanggungjawab,
+                 AVG(komunikasi) as averageKomunikasi')
+            ->where('karyawan_id', $id)
+            ->where('periode_id', $bulansekarang)
+            ->first();
+
+        $saran = DB::table('hasil')
+            ->where('karyawan_id', $id)
+            ->where('periode_id', $bulansekarang)
+            // ->orderByDesc('id')
+            ->get();
+
+        $hasil1 = DB::table('hasil')
+            ->where('karyawan_id', '=', $id)
+            ->join('periode', 'hasil.periode_id', '=', 'periode.id_periode')
+            ->orderByDesc('id')
+            ->first();
+
+        $karyawan = DB::table('users')
+            ->where('id', $id)
+            ->first();
+
+        $datakaryawan = DB::table('karyawan')
+            ->where('user_id', $id)
+            ->first();
+        // dd($datakaryawan);
+
+        return view('admin.datahasil.cetakperorang', ['hasil1' => $hasil1, 'hasil' => $hasil, 'saran' => $saran, 'karyawan' => $karyawan, 'datakaryawan' => $datakaryawan]);
     }
 
     public function datadetail($id)

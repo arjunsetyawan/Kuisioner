@@ -13,11 +13,13 @@ Email : <b>{!! $body !!}</b><br>
 password : <b>{!! $body2 !!}</b>
 <br>
 <br>
-3. Lengkapi Profile Anda
+3. Ganti password anda di menu Info Akun
 <br><br>
-4. Kerjakan Kuisioner Kinerja untuk untuk partner anda
+4. Lengkapi profil anda
 <br><br>
-5. Submit<br>
+5. Kerjakan Kuisioner Kinerja untuk untuk partner anda
+<br><br>
+6. Submit<br>
 <br><br><br>
 
 

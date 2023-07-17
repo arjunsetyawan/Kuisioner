@@ -108,6 +108,11 @@
                                     <div data-i18n="Connections">Cetak Hasil</div>
                                 </a>
                             </li>
+                            <li class="menu-item">
+                                <a href="/info" class="menu-link">
+                                    <div data-i18n="Connections">Info Akun</div>
+                                </a>
+                            </li>
                         </ul>
                         <hr>
                     </li>
@@ -169,14 +174,23 @@
                                             </thead>
                                             <tbody>
                                                 <tr>
+                                                    <?php
+                                                    $essay = "";
+                                                    $no = 1;
+                                                    ?>
                                                     <td>1.</td>
                                                     <td>Atitude</td>
                                                     <td>{{ number_format($hasil->averageAttitude * 100/12 ) }}%</td>
                                                     <td>
                                                         @if ($hasil->averageAttitude <= 3) Anda memiliki attitude yang kurang aik @elseif($hasil->averageAttitude <= 6) Anda memiliki attitude yang cukup baik @elseif($hasil->averageAttitude <= 9) Anda memiliki attitude yang baik @elseif($hasil->averageAttitude <= 12) Anda memiliki attitude yang sangat baik @endif </td>
                                                                         @foreach ($saran as $data )
-                                                    <td rowspan="8">{{ $data->value_essay }}</td>
-                                                    @endforeach
+                                                                        <?php
+
+                                                                        $essay .= " (Saran " . $no++ . ") " . $data->value_essay .  "<br>"; ?>
+
+                                                                        @endforeach
+                                                    <td rowspan="8">{!! $essay !!}</td>
+
                                                 </tr>
                                                 <tr>
                                                     <td>2.</td>

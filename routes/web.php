@@ -31,7 +31,7 @@ use App\Http\Controllers\DataKriteriaController;
 Route::get('/', [DashboardController::class, 'index']);
 
 //Login
-Route::get('/login', [LoginController::class, 'index'])->middleware('guest');
+Route::get('/login', [LoginController::class, 'index'])->middleware('guest')->name('login');
 Route::post('/login', [LoginController::class, 'auth']);
 Route::post('/logout', [LoginController::class, 'logout']);
 
@@ -130,6 +130,7 @@ Route::middleware(['auth', 'IsHRD'])->group(function () {
     Route::get('/hrd/viewhasil', [HasilController::class, 'index']);
     Route::get('/hrd/detailhasil/{id}', [HasilController::class, 'detail']);
     Route::get('/hrd/cetakhasil/', [HasilController::class, 'cetak'])->name('cetakhasil');
+    Route::get('/hrd/cetakperorang/{id}', [HasilController::class, 'cetakPenilaianOrang']);
 
     //HRD -> Data Karyawan
     Route::get('/hrd/viewkaryawan', [KaryawanController::class, 'index']);

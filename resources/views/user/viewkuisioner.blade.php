@@ -156,6 +156,7 @@
                                         </div>
                                         <div class="card-body">
                                             <h5 class="card-title">{{ $data->nama_pertanyaan }}</h5>
+                                            @if ($data->kartegori_id == 0)
                                             <div class="form-check">
                                                 <input class="form-check-input" type="radio" name="{{ $data->id }}" id="flexRadioDefault1" value="4" />
                                                 <label class="form-check-label" for="flexRadioDefault1">
@@ -180,6 +181,34 @@
                                                     Kurang
                                                 </label>
                                             </div>
+
+                                            @else
+
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="radio" name="{{ $data->id }}" id="flexRadioDefault1" value="4" />
+                                                <label class="form-check-label" for="flexRadioDefault1">
+                                                    Sangat Buruk
+                                                </label>
+                                            </div>
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="radio" name="{{ $data->id }}" id="flexRadioDefault2" value="3" />
+                                                <label class="form-check-label" for="flexRadioDefault2">
+                                                    Buruk
+                                                </label>
+                                            </div>
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="radio" name="{{ $data->id }}" id="flexRadioDefault3" value="2" />
+                                                <label class="form-check-label" for="flexRadioDefault3">
+                                                    Cukup
+                                                </label>
+                                            </div>
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="radio" name="{{ $data->id }}" id="flexRadioDefault4" value="1" />
+                                                <label class="form-check-label" for="flexRadioDefault4">
+                                                    Baik
+                                                </label>
+                                            </div>
+                                            @endif
 
                                             <input type="hidden" class="form-control" id="periode" value="{{ $data->periode_id }}" name="periode">
                                         </div>

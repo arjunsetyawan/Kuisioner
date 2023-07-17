@@ -37,14 +37,19 @@ class AkunController extends Controller
      */
     public function store(Request $request)
     {
-        $akun = Akun::where('id', '=', auth()->user()->id)->first();
-        $validateData = $request->validate(
-            ['password' => 'required']
-        );
-        $validateData['password'] = Hash::make($validateData['password']);
-        $akun->update($validateData);
+        if (!Hash::check($request->old_password, auth()->user()->password)) {
+            return back()->with('error', 'Password lama tidak sesuai');
+        }
 
-        return redirect()->route('viewinfo')->with('success', 'Password berhasil diubah');
+        if ($request->new_password != $request->repeat_password) {
+            return back()->with('error', 'Password baru tidak sama');
+        }
+
+        auth()->user()->update([
+            'password' => Hash::make($request->new_password)
+        ]);
+
+        return redirect()->route('viewinfo')->with('success', 'Password berhasil diubah, silahkan login ulang');
     }
 
     /**
