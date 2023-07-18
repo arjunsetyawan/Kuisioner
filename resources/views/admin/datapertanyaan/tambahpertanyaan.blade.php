@@ -39,12 +39,24 @@
                             <option value="{{ $periode->id_periode }}">{{ $periode->bulan }}</option>
                             @endforeach
                         </select>
+                        @error('periode_id')
+                        <div class="invalid-feedback">
+                            {{ $message }}
+                        </div>
+                        @enderror
                     </div>
-                    @error('periode_id')
-                    <div class="invalid-feedback">
-                        {{ $message }}
+                    <div class="mb-3">
+                        <label for="periode" class="form-label">Kartegori</label>
+                        <select class="form-select form-control @error('kartegori_id') is-invalid @enderror" name="kartegori_id">
+                            <option value="0">Positif</option>
+                            <option value="1">Negatif</option>
+                        </select>
+                        @error('periode_id')
+                        <div class="invalid-feedback">
+                            {{ $message }}
+                        </div>
+                        @enderror
                     </div>
-                    @enderror
             </div>
             <button type="submit" class="btn btn-primary">Submit</button>
             </form>

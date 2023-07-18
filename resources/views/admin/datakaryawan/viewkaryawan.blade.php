@@ -53,9 +53,9 @@ use Carbon\Carbon;
                             <td>{{ $data->tempat_lahir }}</td>
                             <td>{{ Carbon::parse($data->tanggal_lahir)->format('d-m-Y')}}</td>
                             <td>{{ $data->gender}}</td>
-                            <th>{{ $data->alamat }}</th>
-                            <th>{{ $data->nama_divisi }}</th>
-                            <th>{{ $data->no_telp }}</th>
+                            <td>{{ $data->alamat }}</td>
+                            <td>{{ $data->nama_divisi }}</td>
+                            <td>{{ $data->no_telp }}</td>
                         </tr>
                         @endforeach
                         </tbody>

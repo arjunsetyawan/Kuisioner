@@ -146,14 +146,14 @@
                                     <div class="card-body">
                                         <div class="container">
                                             <div class="left">
-                                                @if ($pengisi == $karyawan )
+                                                @if ($pengisi == $pengisi )
                                                 <a href="/cetak" target="_blank" class="print-hidden mb-4 btn btn-primary"><i class="bi bi-printer-fill"></i>Cetak Data Hasil</a>
                                                 @else
 
                                                 @endif
                                             </div>
                                             <div class="right">
-                                                <p>Telah diisi {{$pengisi}} dari {{$karyawan}}</p>
+                                                <p>Telah diisi {{$pengisi}} dari {{$pengisi}}</p>
                                             </div>
                                         </div>
                                         <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
@@ -165,6 +165,8 @@
                                                     <th colspan="2" class="text-center" class="text-center">Penilaian</th>
                                                     @if ($saran->count()>1)
                                                     <th rowspan="2" colspan="{{$saran->count() }}" class="text-center" style="width:40%">Saran</th>
+                                                    @else
+                                                    <th rowspan="2" colspan="1" class="text-center" style="width:40%">Saran</th>
                                                     @endif
                                                 </tr>
                                                 <tr>
@@ -186,7 +188,7 @@
                                                                         @foreach ($saran as $data )
                                                                         <?php
 
-                                                                        $essay .= " (Saran " . $no++ . ") " . $data->value_essay .  "<br>"; ?>
+                                                                        $essay .= $no++ . ". " . $data->value_essay .  "<br>"; ?>
 
                                                                         @endforeach
                                                     <td rowspan="8">{!! $essay !!}</td>

@@ -33,6 +33,7 @@
                             <th>No</th>
                             <th>Kriteria</th>
                             <th>Pertanyaan</th>
+                            <th>Kartegori</th>
                             <th>Periode</th>
                             @can('admin')
                             <th style="width: 10%;">Action</th>
@@ -46,6 +47,12 @@
                             <th>{{ $no++ }}</th>
                             <td>{{ $data->kriteria }}</td>
                             <td>{{ $data->nama_pertanyaan }}</td>
+                            <td>@if ($data->kartegori_id == 0)
+                                Positif
+                                @else
+                                Negatif
+                                @endif
+                            </td>
                             <td>{{ $data->bulan }}</td>
                             @can('admin')
                             <td>

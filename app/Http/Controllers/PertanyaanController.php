@@ -33,7 +33,7 @@ class PertanyaanController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-     //Menampilkan halaman tambah data pertanyaan
+    //Menampilkan halaman tambah data pertanyaan
     public function create()
     {
         return view('admin.datapertanyaan.tambahpertanyaan', ['kriterias' => DataKriteria::all(), 'periodes' => Periode::all()]);
@@ -46,14 +46,15 @@ class PertanyaanController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-     //Menyimpan data pertanyaan
+    //Menyimpan data pertanyaan
     public function store(Request $request)
     {
         // dd($request->all());
         $validateData = $request->validate([
             'kriteria_id' => 'required',
             'nama_pertanyaan' => 'required',
-            'periode_id' => 'required'
+            'periode_id' => 'required',
+            'kartegori_id' => 'required',
         ]);
         Pertanyaan::create($validateData);
         return redirect()->route('viewpertanyaan')->with('success', 'Pertanyaan baru telah ditambahkan!');
@@ -77,7 +78,7 @@ class PertanyaanController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-     //Menampilkan halaman edit data pertanyaan
+    //Menampilkan halaman edit data pertanyaan
     public function edit($id)
     {
         // dd($id);
@@ -94,13 +95,14 @@ class PertanyaanController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-     //Mengupdate data pertanyaan
+    //Mengupdate data pertanyaan
     public function update(Request $request, Pertanyaan $id)
     {
         $validateData = $request->validate([
             'kriteria_id' => 'required',
             'nama_pertanyaan' => 'required',
-            'periode_id' => 'required'
+            'periode_id' => 'required',
+            'kartegori_id' => 'required',
         ]);
         $id->update($validateData);
         return redirect()->route('viewpertanyaan')->with('sukses', 'Data Pertanyaan berhasil diupdate!');

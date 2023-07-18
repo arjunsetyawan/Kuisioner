@@ -13,8 +13,9 @@ use Carbon\Carbon;
 
 <body>
     <div class="form-group">
-        <h3 align="center"><b>Laporan Hasil Penilaian</b></h3>
-        <p style="margin-left:10px; margin-top:40px;"> <b>Nama : {{ auth()->user()->nama }}</b> </p>
+        <img src="{!! asset('img/monster.jpg') !!}" style="margin-left:300px;">
+        <h2 align="center"><b>Laporan Hasil Penilaian</b></h2>
+        <p style="margin-left:10px; margin-top:50px;"> <b>Nama : {{ auth()->user()->nama }}</b> </p>
         <p style="margin-left:10px;"> <b>Periode : {{ $hasil1->  bulan}}</b> </p>
         <p style="margin-left:10px"> <b>Tanggal : {{ Carbon::parse($hasil1->tanggal_pengisian)->format('d-m-Y') }}</b></p>
         <table class="static" align="center" rules="all" border="1px" style="width:100%;">
@@ -35,14 +36,22 @@ use Carbon\Carbon;
             </thead>
             <tbody>
                 <tr>
+                    <?php
+                    $essay = "";
+                    $no = 1;
+                    ?>
                     <td>1.</td>
                     <td>Atitude</td>
                     <td>{{ number_format($hasil->averageAttitude * 100/12 ) }}%</td>
                     <td>
                         @if ($hasil->averageAttitude <= 3) Anda memiliki attitude yang kurang aik @elseif($hasil->averageAttitude <= 6) Anda memiliki attitude yang cukup baik @elseif($hasil->averageAttitude <= 9) Anda memiliki attitude yang baik @elseif($hasil->averageAttitude <= 12) Anda memiliki attitude yang sangat baik @endif </td>
                                         @foreach ($saran as $data )
-                    <td rowspan="8">{{ $data->value_essay }}</td>
-                    @endforeach
+                                        <?php
+
+                                        $essay .= $no++ . ". " . $data->value_essay .  "<br>"; ?>
+
+                                        @endforeach
+                    <td rowspan="8">{!! $essay !!}</td>
                 </tr>
                 <tr>
                     <td>2.</td>
