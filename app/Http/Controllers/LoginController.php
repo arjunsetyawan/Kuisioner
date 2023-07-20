@@ -29,9 +29,7 @@ class LoginController extends Controller
         $credentials = $request->validate([
             'email' => 'required|email:dns',
             'password' => 'required',
-
         ]);
-
         //Validasi Captcha
         $recaptcha_secret = "6Le1A8ImAAAAAEJ6__CVfPZC_-6G8m_2My8aYiKL";
         $response = file_get_contents("https://www.google.com/recaptcha/api/siteverify?secret=" . $recaptcha_secret . "&response=" . $input['g-recaptcha-response']);

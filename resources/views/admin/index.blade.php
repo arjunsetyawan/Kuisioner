@@ -11,9 +11,17 @@ use Carbon\CarbonInterface;
 <div class="container-fluid">
 
     <!-- Page Heading -->
+    @can('hrd')
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
         <h1 class="h3 mb-0 text-gray-800">Grafik Penilaian Bulan {{ Carbon::now()->isoFormat('MMMM')}}</h1>
     </div>
+    @endcan
+
+    @can('admin')
+    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+        <h1 class="h3 mb-0 text-gray-800">Dashboard Admin</h1>
+    </div>
+    @endcan
 
     <!-- Content Row -->
     <div class="row">

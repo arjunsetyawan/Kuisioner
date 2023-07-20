@@ -37,7 +37,7 @@ use Carbon\Carbon;
         @endif
 
         <div class="card-body">
-            <a href="/hrd/cetakhasil/" class="btn btn-danger mb-2 justify-content-end float-right"><i class="bi bi-printer me-2 "></i>Cetak Data Seluruh Karyawan</a>
+            <!-- <a href="/hrd/cetakhasil/" class="btn btn-danger mb-2 justify-content-end float-right"><i class="bi bi-printer me-2 "></i>Cetak Data Seluruh Karyawan</a> -->
             <div class="table-responsive">
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                     <thead>

@@ -64,7 +64,7 @@ use Carbon\Carbon;
                 <tr>
                     <td>Periode</td>
                     <td style="width: 5%;">:</td>
-                    <td>Periode : {{ $hasil1->bulan}}</td>
+                    <td>{{ $hasil1->bulan}}</td>
                 </tr>
                 <tr>
                     <td>Tanggal Pengisian</td>
