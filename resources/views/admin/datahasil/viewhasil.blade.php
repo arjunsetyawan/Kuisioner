@@ -70,7 +70,7 @@ use Carbon\Carbon;
                             <td>{{ $data->status }}</td>
                             <td>
                                 <a href="/hrd/detailhasil/{{$data->id}}" class="btn btn-primary"><i class="bi bi-eye-fill"></i></a>
-                                <a href="/hrd/cetakperorang/{{$data->id}}" target="_blank" class="print-hidden mb-4 btn btn-danger d-inline"><i class="bi bi-printer-fill"></i></a>
+                                <a href="/hrd/cetakperorang/{{$data->id}}" x class="print-hidden mb-4 btn btn-danger d-inline"><i class="bi bi-printer-fill"></i></a>
                             </td>
                         </tr>
                         </tbody>
